@@ -15,18 +15,28 @@ namespace WeatherStationDesktop
 {
     public partial class FormMain : Form
     {
-        Measurements measurements = new Measurements();
+        Measurements measurements;
+        List<RadioButton> LastRange = new List<RadioButton>();
         public FormMain()
         {
             InitializeComponent();
-            textBox_LastMesPress.Text = measurements.LastPress.ToString();
-            textBox_LastMesTemp.Text = measurements.LastTemp.ToString();
-            textBox_LastMesTime.Text = measurements.LastTime.ToString();
-            textBoxLastMesHum.Text = measurements.LastHum.ToString();
-            UpdateCharts();
+            measurements = new Measurements();
+            if (measurements.ConnectionStatus)
+            {
+                textBox_LastMesPress.Text = measurements.LastPress.ToString();
+                textBox_LastMesTemp.Text = measurements.LastTemp.ToString();
+                textBox_LastMesTime.Text = measurements.LastTime.ToString();
+                textBoxLastMesHum.Text = measurements.LastHum.ToString();
+                UpdateCharts();
+            }
+            else
+            {
+                MessageBox.Show("Database is out of range! Please check internet connection.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                System.Environment.Exit(0);
+            }
         }
 
-        void UpdateCharts()
+        bool UpdateCharts()
         {
             Cursor.Current = Cursors.WaitCursor;
             int rangeCode;
@@ -41,63 +51,98 @@ namespace WeatherStationDesktop
             {
                 rangeCode = 7;
             }
+
             ChartsDatas chartsDatas = measurements.GetChartsDatas(rangeCode);
+            if (measurements.ConnectionStatus)
+            {
+                cartesianChartPressure.Series.Clear();
+                cartesianChartPressure.AxisX.Clear();
+                cartesianChartPressure.AxisY.Clear();
+                cartesianChartTemperature.Series.Clear();
+                cartesianChartTemperature.AxisX.Clear();
+                cartesianChartHumidity.Series.Clear();
+                cartesianChartHumidity.AxisX.Clear();
 
-            cartesianChartPressure.Series.Clear();
-            cartesianChartPressure.AxisX.Clear();
-            cartesianChartTemperature.Series.Clear();
-            cartesianChartTemperature.AxisX.Clear();
-            cartesianChartHumidity.Series.Clear();
-            cartesianChartHumidity.AxisX.Clear();
+                SeriesCollection PressSeries = new SeriesCollection();
+                LineSeries PressSet = new LineSeries() { Title = "Pressure", Values = new ChartValues<double>(chartsDatas.Pressure), };
+                PressSet.Stroke = System.Windows.Media.Brushes.Orange;
+                PressSeries.Add(PressSet);
+                cartesianChartPressure.Series = PressSeries;
 
-            SeriesCollection SeriesPress = new SeriesCollection();
-            LineSeries pressSeries = new LineSeries() { Title = "Pressure", Values = new ChartValues<double>(chartsDatas.Pressure), };
-            pressSeries.Stroke = System.Windows.Media.Brushes.Orange;
-            SeriesPress.Add(pressSeries);
-            cartesianChartPressure.Series = SeriesPress;
+                SeriesCollection HumSeries = new SeriesCollection();
+                LineSeries HumSet = new LineSeries() { Title = "Humidity", Values = new ChartValues<double>(chartsDatas.Humidity), };
+                HumSeries.Add(HumSet);
+                cartesianChartHumidity.Series = HumSeries;
 
-            SeriesCollection seriesHum = new SeriesCollection();
-            LineSeries humSeries = new LineSeries() { Title = "Humidity", Values = new ChartValues<double>(chartsDatas.Humidity), };
-            seriesHum.Add(humSeries);
-            cartesianChartHumidity.Series = seriesHum;
+                SeriesCollection TempSeries = new SeriesCollection();
+                LineSeries TempSet = new LineSeries() { Title = "Temperature", Values = new ChartValues<double>(chartsDatas.Temperature) };
+                TempSet.Stroke = System.Windows.Media.Brushes.Red;
+                TempSeries.Add(TempSet);
+                cartesianChartTemperature.Series = TempSeries;
+                Axis axPress = new Axis() { Separator = new Separator() { Step = 12 } };
+               // Axis ayPress = new Axis() { MinValue = 95000, MaxValue = 101000 };
+                axPress.Labels = chartsDatas.TimesLabels;
+                Axis axTem = new Axis() { Separator = new Separator() { Step = 12 } };
+                axTem.Labels = chartsDatas.TimesLabels;
+                Axis axHum = new Axis() { Separator = new Separator() { Step = 12 } };
+                axHum.Labels = chartsDatas.TimesLabels;
 
-            SeriesCollection SeriesTemp = new SeriesCollection();
-            LineSeries temSeries = new LineSeries() { Title = "Temperature", Values = new ChartValues<double>(chartsDatas.Temperature) };
-            temSeries.Stroke = System.Windows.Media.Brushes.Red;
-            SeriesTemp.Add(temSeries);
-            cartesianChartTemperature.Series = SeriesTemp;
-            Axis axPress = new Axis() { Separator = new Separator() { Step = 12 } };
-            axPress.Labels = chartsDatas.TimesLabels;
-            Axis axTem= new Axis() { Separator = new Separator() { Step = 12 } };
-            axTem.Labels = chartsDatas.TimesLabels;
-            Axis axHum = new Axis() { Separator = new Separator() { Step = 12 } };
-            axHum.Labels = chartsDatas.TimesLabels;
+                cartesianChartPressure.AxisX.Add(axPress);
+                //cartesianChartPressure.AxisY.Add(ayPress);
+                cartesianChartTemperature.AxisX.Add(axTem);
+                cartesianChartHumidity.AxisX.Add(axHum);
+                AddLastRange();
+                Cursor.Current = Cursors.Default;
 
-            cartesianChartPressure.AxisX.Add(axPress);
-            cartesianChartTemperature.AxisX.Add(axTem);
-            cartesianChartHumidity.AxisX.Add(axHum);
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("Update failed!", "Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                Cursor.Current = Cursors.Default;
+                restoreLastRange();
+                return false;
+            }
 
-            Cursor.Current = Cursors.Default;
+
+        
         }
 
-        private void buttonRefresh_Click(object sender, EventArgs e)
+        void AddLastRange()
         {
+            if (radioButtonToday.Checked)
+            {
+                LastRange.Add(radioButtonToday);
+            }
+            else if (radioButton3Days.Checked)
+            {
+                LastRange.Add(radioButton3Days);
+            }
+            else
+            {
+                LastRange.Add(radioButtonWeek);
+            }
+        }
 
+        void restoreLastRange()
+        {
+            RadioButton button = LastRange.Last();
+            button.Checked = true;
         }
 
         private void radioButtonToday_CheckedChanged(object sender, EventArgs e)
         {
-            UpdateCharts();
+           if(radioButtonToday.Checked & LastRange.Last()!=radioButtonToday) UpdateCharts();
         }
 
         private void radioButton3Days_CheckedChanged(object sender, EventArgs e)
         {
-            UpdateCharts();
+            if (radioButton3Days.Checked & LastRange.Last() != radioButton3Days) UpdateCharts();
         }
 
         private void radioButtonWeek_CheckedChanged(object sender, EventArgs e)
         {
-            UpdateCharts();
+            if (radioButtonWeek.Checked & LastRange.Last() != radioButtonWeek) UpdateCharts();
         }
     }
 }

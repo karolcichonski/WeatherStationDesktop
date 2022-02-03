@@ -12,60 +12,70 @@ namespace WeatherStationDesktop
     {
         public Measurements()
         {
-            GetMeasurementsFromDB(queries[0]);
-            LastTemp = AllMeasurements[0].Temp;
-            LastPress = AllMeasurements[0].Press;
-            LastTime = AllMeasurements[0].Time.ToString();
-            LastHum = AllMeasurements[0].Hum;
+            if (GetMeasurementsFromDB(query))
+            {
+                LastTemp = AllMeasurements[0].Temp;
+                LastPress = AllMeasurements[0].Press;
+                LastTime = AllMeasurements[0].Time.ToString();
+                LastHum = AllMeasurements[0].Hum;
+                ConnectionStatus = true;
+            }
         }
-        string[] queries = { $"SELECT * FROM `ESP` ORDER BY Time Desc LIMIT 1" };
+        string query = "SELECT * FROM `ESP` ORDER BY Time Desc LIMIT 1";
 
         List<SingleMeasure> AllMeasurements = new List<SingleMeasure>();
-
-        DBConnection connection = new DBConnection();
+        public List<Exception> Exceptions { get; private set; } = new List<Exception>();
         
         public double LastTemp { get; private set; }
         public int LastPress { get; private set; }
         public string LastTime { get; private set; }
         public double LastHum { get; private set; }
-
+        public bool ConnectionStatus { get; private set; }
 
 
         public ChartsDatas GetChartsDatas(int daysToRead)
         {
             DateTime daysAgo = DateTime.Today.AddDays(-daysToRead+1);
-            //DateTime today = DateTime.Today;
-            //string query =$"SELECT * FROM `ESP` ORDER BY Time Desc Limit 360";
-            //string query = $"SELECT* FROM ESP WHERE Time > CURDATE() ORDER BY Time Desc";
-            //string query = $"SELECT* FROM ESP WHERE Time > '2022-01-28' and Time <= '2022-01-29' ";
             string query = $"SELECT* FROM ESP WHERE Time > '{daysAgo.ToString("yyyy-MM-dd")}' and Time <= '{DateTime.Today.ToString("yyyy-MM-dd")} 23:59:59' ";
-            GetMeasurementsFromDB(query);
+            ConnectionStatus=GetMeasurementsFromDB(query);
             ChartsDatas OutDatas = new ChartsDatas(AllMeasurements);
             return OutDatas;
         } 
 
-        void GetMeasurementsFromDB(string query)
+        bool GetMeasurementsFromDB(string query)
         {
-            
-            MySqlConnection DBcon = new MySqlConnection(connection.GetConnectionString());
-            DBcon.Open();
-            MySqlCommand SQLcommand = new MySqlCommand(query, DBcon);
-            MySqlDataReader output = SQLcommand.ExecuteReader();
-            AllMeasurements.Clear();
-            while (output.Read())
+            try
             {
-                SingleMeasure meas = new SingleMeasure();
-                meas.SetPress(output.GetInt32(0));
-                meas.SetTemp(output.GetDouble(1));
-                meas.SetHum(output.GetDouble(2));
-                meas.SetTime(output.GetDateTime(3));
-                meas.SetTempDH(output.GetDouble(4));
-                meas.SetTempDS(output.GetDouble(5));
+                using (MySqlConnection DBcon = new MySqlConnection(DBConnection.GetConnectionString()))
+                {
 
-                AllMeasurements.Add(meas);
+                    DBcon.Open();
+                    MySqlCommand SQLcommand = new MySqlCommand(query, DBcon);
+                    MySqlDataReader output = SQLcommand.ExecuteReader();
+                    AllMeasurements.Clear();
+                    while (output.Read())
+                    {
+                        SingleMeasure meas = new SingleMeasure();
+                        meas.SetPress(output.GetInt32(0));
+                        meas.SetTemp(output.GetDouble(1));
+                        meas.SetHum(output.GetDouble(2));
+                        meas.SetTime(output.GetDateTime(3));
+                        meas.SetTempDH(output.GetDouble(4));
+                        meas.SetTempDS(output.GetDouble(5));
+
+                        AllMeasurements.Add(meas);
+                    }
+
+                    DBcon.Close();
+                    return true;
+
+                }
             }
-
-            DBcon.Close();
+            catch(Exception Exception)
+            {
+                Exceptions.Add(Exception);
+                return false;
+            }
         }
 
 
@@ -112,31 +122,4 @@ namespace WeatherStationDesktop
         }
 
     }
-
-    /*public class ChartData1<T>
-    { 
-        List<T> InputData = new List<T>();
-        List<T> NormalizeData = new List<T>();
-        int NumOfOutputRecords { get; set; }
-
-        List<T> GetSimpleList(List<T> InputList)
-        {
-            List<T> OutList = new List<T>();
-
-            int startNum = 0;
-
-            int numOfItems = InputList.Count / 100;
-
-            for (int i = 1; i <= 100; i++)
-            {
-                List<T> TMP = InputList.GetRange(startNum, numOfItems);
-                double avg = TMP.Sum();
-                //OutList.Add(avg);
-                startNum += numOfItems;
-            }
-
-            OutList.Reverse();
-            return OutList;
-        }
-    }*/
 }

@@ -13,7 +13,6 @@ namespace WeatherStationDesctop
         public ChartsDatas(List<SingleMeasure> AllData)
         {
             InputData = AllData;
-            //InputData.Reverse();
             Times = new List<DateTime>();
             TimesLabels = new List<string>();
             Pressure = new List<double>();
@@ -22,36 +21,14 @@ namespace WeatherStationDesctop
             GetSimpleListByTime(CalculateDelay());
         }
 
-        public List<DateTime> Times { get; set; }
-        public List<String> TimesLabels { get; set; }
-        public List<double> Pressure { get; set; } 
-        public List<double> Temperature { get; set; }
-        public List<double> Humidity { get; set; }
+        public List<DateTime> Times { get; private set; }
+        public List<String> TimesLabels { get; private set; }
+        public List<double> Pressure { get; private set; } 
+        public List<double> Temperature { get; private set; }
+        public List<double> Humidity { get; private set; }
 
         List<SingleMeasure> InputData;
 
-        int NumOfOutputRecords { get; set; }
-
-        void GetSimpleList()
-        {
-
-            int startNum = 0;
-
-            int numOfItems = InputData.Count / 144;
-
-            for (int i = 1; i <= 144; i++)
-            {
-                List<SingleMeasure> TMP = InputData.GetRange(startNum, numOfItems);
-                double avgPress = TMP.Average(X=> X.Press);
-                double avgTemp = TMP.Average(X=> X.Temp);
-                double avgHum = TMP.Average(X=>X.Hum);
-                Pressure.Add(avgPress);
-                Temperature.Add(avgTemp);
-                Humidity.Add(avgHum);
-                Times.Add(TMP[0].Time);
-                startNum += numOfItems;
-            }
-        }
 
         void GetSimpleListByTime(int intervalInMin)
         {

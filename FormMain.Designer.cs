@@ -33,7 +33,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.cartesianChartPressure = new LiveCharts.WinForms.CartesianChart();
             this.label2 = new System.Windows.Forms.Label();
-            this.buttonRefresh = new System.Windows.Forms.Button();
             this.radioButtonToday = new System.Windows.Forms.RadioButton();
             this.radioButtonWeek = new System.Windows.Forms.RadioButton();
             this.radioButton3Days = new System.Windows.Forms.RadioButton();
@@ -91,28 +90,17 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "Pressure";
             // 
-            // buttonRefresh
-            // 
-            this.buttonRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.buttonRefresh.ForeColor = System.Drawing.Color.White;
-            this.buttonRefresh.Location = new System.Drawing.Point(50, 771);
-            this.buttonRefresh.Name = "buttonRefresh";
-            this.buttonRefresh.Size = new System.Drawing.Size(99, 41);
-            this.buttonRefresh.TabIndex = 5;
-            this.buttonRefresh.Text = "Refresh";
-            this.buttonRefresh.UseVisualStyleBackColor = true;
-            this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
-            // 
             // radioButtonToday
             // 
             this.radioButtonToday.AutoSize = true;
+            this.radioButtonToday.Checked = true;
             this.radioButtonToday.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.radioButtonToday.ForeColor = System.Drawing.Color.White;
             this.radioButtonToday.Location = new System.Drawing.Point(24, 20);
             this.radioButtonToday.Name = "radioButtonToday";
             this.radioButtonToday.Size = new System.Drawing.Size(58, 18);
             this.radioButtonToday.TabIndex = 6;
+            this.radioButtonToday.TabStop = true;
             this.radioButtonToday.Text = "Today";
             this.radioButtonToday.UseVisualStyleBackColor = true;
             this.radioButtonToday.CheckedChanged += new System.EventHandler(this.radioButtonToday_CheckedChanged);
@@ -120,14 +108,12 @@
             // radioButtonWeek
             // 
             this.radioButtonWeek.AutoSize = true;
-            this.radioButtonWeek.Checked = true;
             this.radioButtonWeek.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.radioButtonWeek.ForeColor = System.Drawing.Color.White;
             this.radioButtonWeek.Location = new System.Drawing.Point(147, 21);
             this.radioButtonWeek.Name = "radioButtonWeek";
             this.radioButtonWeek.Size = new System.Drawing.Size(56, 18);
             this.radioButtonWeek.TabIndex = 7;
-            this.radioButtonWeek.TabStop = true;
             this.radioButtonWeek.Text = "Week";
             this.radioButtonWeek.UseVisualStyleBackColor = true;
             this.radioButtonWeek.CheckedChanged += new System.EventHandler(this.radioButtonWeek_CheckedChanged);
@@ -153,9 +139,9 @@
             this.groupBoxRange.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.groupBoxRange.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.groupBoxRange.ForeColor = System.Drawing.Color.White;
-            this.groupBoxRange.Location = new System.Drawing.Point(158, 762);
+            this.groupBoxRange.Location = new System.Drawing.Point(47, 741);
             this.groupBoxRange.Name = "groupBoxRange";
-            this.groupBoxRange.Size = new System.Drawing.Size(209, 50);
+            this.groupBoxRange.Size = new System.Drawing.Size(219, 50);
             this.groupBoxRange.TabIndex = 9;
             this.groupBoxRange.TabStop = false;
             this.groupBoxRange.Text = "Select Range";
@@ -172,9 +158,9 @@
             this.groupBox1.Controls.Add(this.textBox_LastMesTemp);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.groupBox1.ForeColor = System.Drawing.Color.White;
-            this.groupBox1.Location = new System.Drawing.Point(373, 762);
+            this.groupBox1.Location = new System.Drawing.Point(275, 741);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(717, 50);
+            this.groupBox1.Size = new System.Drawing.Size(815, 50);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Last Measurement";
@@ -284,7 +270,6 @@
             this.Controls.Add(this.cartesianChartHumidity);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBoxRange);
-            this.Controls.Add(this.buttonRefresh);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cartesianChartPressure);
             this.Controls.Add(this.label1);
@@ -308,7 +293,6 @@
         private System.Windows.Forms.Label label1;
         private LiveCharts.WinForms.CartesianChart cartesianChartPressure;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button buttonRefresh;
         private System.Windows.Forms.RadioButton radioButtonToday;
         private System.Windows.Forms.RadioButton radioButtonWeek;
         private System.Windows.Forms.RadioButton radioButton3Days;
