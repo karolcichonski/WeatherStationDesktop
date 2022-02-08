@@ -56,11 +56,41 @@
             this.cartesianChartPressure = new LiveCharts.WinForms.CartesianChart();
             this.label1 = new System.Windows.Forms.Label();
             this.cartesianChartTemperature = new LiveCharts.WinForms.CartesianChart();
+            this.groupBoxForecast = new System.Windows.Forms.GroupBox();
+            this.pictureBoxForecast7 = new System.Windows.Forms.PictureBox();
+            this.pictureBoxForecast6 = new System.Windows.Forms.PictureBox();
+            this.pictureBoxForecast5 = new System.Windows.Forms.PictureBox();
+            this.pictureBoxForecast4 = new System.Windows.Forms.PictureBox();
+            this.pictureBoxForecast3 = new System.Windows.Forms.PictureBox();
+            this.pictureBoxForecast2 = new System.Windows.Forms.PictureBox();
+            this.pictureBoxForecast1 = new System.Windows.Forms.PictureBox();
+            this.textBoxForecast1main = new System.Windows.Forms.TextBox();
+            this.textBoxForecast2main = new System.Windows.Forms.TextBox();
+            this.textBoxForecast3main = new System.Windows.Forms.TextBox();
+            this.textBoxForecast4main = new System.Windows.Forms.TextBox();
+            this.textBoxForecast5main = new System.Windows.Forms.TextBox();
+            this.textBoxForecast6main = new System.Windows.Forms.TextBox();
+            this.textBoxForecast7main = new System.Windows.Forms.TextBox();
+            this.textBoxForecast1details = new System.Windows.Forms.TextBox();
+            this.textBoxForecast2details = new System.Windows.Forms.TextBox();
+            this.textBoxForecast3details = new System.Windows.Forms.TextBox();
+            this.textBoxForecast4details = new System.Windows.Forms.TextBox();
+            this.textBoxForecast5details = new System.Windows.Forms.TextBox();
+            this.textBoxForecast6details = new System.Windows.Forms.TextBox();
+            this.textBoxForecast7details = new System.Windows.Forms.TextBox();
             this.groupBoxCurrentWeather.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCurrentWeather)).BeginInit();
             this.groupBoxIndor.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBoxRange.SuspendLayout();
+            this.groupBoxForecast.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxForecast7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxForecast6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxForecast5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxForecast4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxForecast3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxForecast2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxForecast1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBoxCurrentWeather
@@ -77,7 +107,7 @@
             this.groupBoxCurrentWeather.ForeColor = System.Drawing.Color.White;
             this.groupBoxCurrentWeather.Location = new System.Drawing.Point(48, 29);
             this.groupBoxCurrentWeather.Name = "groupBoxCurrentWeather";
-            this.groupBoxCurrentWeather.Size = new System.Drawing.Size(1043, 60);
+            this.groupBoxCurrentWeather.Size = new System.Drawing.Size(1043, 94);
             this.groupBoxCurrentWeather.TabIndex = 15;
             this.groupBoxCurrentWeather.TabStop = false;
             this.groupBoxCurrentWeather.Text = "Current Weather";
@@ -87,7 +117,7 @@
             this.buttonWeatherDetails.BackColor = System.Drawing.Color.Gray;
             this.buttonWeatherDetails.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonWeatherDetails.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.buttonWeatherDetails.Location = new System.Drawing.Point(886, 19);
+            this.buttonWeatherDetails.Location = new System.Drawing.Point(901, 37);
             this.buttonWeatherDetails.Name = "buttonWeatherDetails";
             this.buttonWeatherDetails.Size = new System.Drawing.Size(75, 23);
             this.buttonWeatherDetails.TabIndex = 22;
@@ -97,9 +127,9 @@
             // 
             // pictureBoxCurrentWeather
             // 
-            this.pictureBoxCurrentWeather.Location = new System.Drawing.Point(261, 12);
+            this.pictureBoxCurrentWeather.Location = new System.Drawing.Point(24, 19);
             this.pictureBoxCurrentWeather.Name = "pictureBoxCurrentWeather";
-            this.pictureBoxCurrentWeather.Size = new System.Drawing.Size(45, 39);
+            this.pictureBoxCurrentWeather.Size = new System.Drawing.Size(50, 60);
             this.pictureBoxCurrentWeather.TabIndex = 21;
             this.pictureBoxCurrentWeather.TabStop = false;
             // 
@@ -109,10 +139,10 @@
             this.textBoxWeatherWind.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxWeatherWind.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.textBoxWeatherWind.ForeColor = System.Drawing.Color.White;
-            this.textBoxWeatherWind.Location = new System.Drawing.Point(745, 19);
+            this.textBoxWeatherWind.Location = new System.Drawing.Point(592, 56);
             this.textBoxWeatherWind.Name = "textBoxWeatherWind";
             this.textBoxWeatherWind.ReadOnly = true;
-            this.textBoxWeatherWind.Size = new System.Drawing.Size(133, 24);
+            this.textBoxWeatherWind.Size = new System.Drawing.Size(289, 24);
             this.textBoxWeatherWind.TabIndex = 20;
             // 
             // textBoxWeatherPress
@@ -121,10 +151,10 @@
             this.textBoxWeatherPress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxWeatherPress.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.textBoxWeatherPress.ForeColor = System.Drawing.Color.White;
-            this.textBoxWeatherPress.Location = new System.Drawing.Point(598, 19);
+            this.textBoxWeatherPress.Location = new System.Drawing.Point(592, 21);
             this.textBoxWeatherPress.Name = "textBoxWeatherPress";
             this.textBoxWeatherPress.ReadOnly = true;
-            this.textBoxWeatherPress.Size = new System.Drawing.Size(141, 24);
+            this.textBoxWeatherPress.Size = new System.Drawing.Size(289, 24);
             this.textBoxWeatherPress.TabIndex = 19;
             // 
             // textBoxWeatherHum
@@ -133,10 +163,10 @@
             this.textBoxWeatherHum.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxWeatherHum.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.textBoxWeatherHum.ForeColor = System.Drawing.Color.White;
-            this.textBoxWeatherHum.Location = new System.Drawing.Point(487, 19);
+            this.textBoxWeatherHum.Location = new System.Drawing.Point(318, 56);
             this.textBoxWeatherHum.Name = "textBoxWeatherHum";
             this.textBoxWeatherHum.ReadOnly = true;
-            this.textBoxWeatherHum.Size = new System.Drawing.Size(105, 24);
+            this.textBoxWeatherHum.Size = new System.Drawing.Size(268, 24);
             this.textBoxWeatherHum.TabIndex = 18;
             // 
             // textBoxWeatherTemp
@@ -145,10 +175,10 @@
             this.textBoxWeatherTemp.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxWeatherTemp.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.textBoxWeatherTemp.ForeColor = System.Drawing.Color.White;
-            this.textBoxWeatherTemp.Location = new System.Drawing.Point(408, 19);
+            this.textBoxWeatherTemp.Location = new System.Drawing.Point(318, 21);
             this.textBoxWeatherTemp.Name = "textBoxWeatherTemp";
             this.textBoxWeatherTemp.ReadOnly = true;
-            this.textBoxWeatherTemp.Size = new System.Drawing.Size(73, 24);
+            this.textBoxWeatherTemp.Size = new System.Drawing.Size(268, 24);
             this.textBoxWeatherTemp.TabIndex = 17;
             // 
             // textBoxWeatherDesc
@@ -157,10 +187,10 @@
             this.textBoxWeatherDesc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxWeatherDesc.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.textBoxWeatherDesc.ForeColor = System.Drawing.Color.White;
-            this.textBoxWeatherDesc.Location = new System.Drawing.Point(312, 19);
+            this.textBoxWeatherDesc.Location = new System.Drawing.Point(80, 55);
             this.textBoxWeatherDesc.Name = "textBoxWeatherDesc";
             this.textBoxWeatherDesc.ReadOnly = true;
-            this.textBoxWeatherDesc.Size = new System.Drawing.Size(90, 24);
+            this.textBoxWeatherDesc.Size = new System.Drawing.Size(231, 24);
             this.textBoxWeatherDesc.TabIndex = 16;
             // 
             // textBoxWeatherTime
@@ -169,7 +199,7 @@
             this.textBoxWeatherTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxWeatherTime.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.textBoxWeatherTime.ForeColor = System.Drawing.Color.White;
-            this.textBoxWeatherTime.Location = new System.Drawing.Point(24, 19);
+            this.textBoxWeatherTime.Location = new System.Drawing.Point(80, 19);
             this.textBoxWeatherTime.Name = "textBoxWeatherTime";
             this.textBoxWeatherTime.ReadOnly = true;
             this.textBoxWeatherTime.Size = new System.Drawing.Size(231, 24);
@@ -210,9 +240,9 @@
             this.groupBoxIndor.Controls.Add(this.cartesianChartTemperature);
             this.groupBoxIndor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.groupBoxIndor.ForeColor = System.Drawing.Color.White;
-            this.groupBoxIndor.Location = new System.Drawing.Point(48, 95);
+            this.groupBoxIndor.Location = new System.Drawing.Point(48, 254);
             this.groupBoxIndor.Name = "groupBoxIndor";
-            this.groupBoxIndor.Size = new System.Drawing.Size(1043, 691);
+            this.groupBoxIndor.Size = new System.Drawing.Size(1043, 494);
             this.groupBoxIndor.TabIndex = 16;
             this.groupBoxIndor.TabStop = false;
             this.groupBoxIndor.Text = "Indor Measurements";
@@ -224,15 +254,15 @@
             this.label6.ForeColor = System.Drawing.Color.White;
             this.label6.Location = new System.Drawing.Point(57, 292);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(69, 17);
+            this.label6.Size = new System.Drawing.Size(85, 17);
             this.label6.TabIndex = 20;
-            this.label6.Text = "Humidity";
+            this.label6.Text = "Humidity %";
             // 
             // cartesianChartHumidity
             // 
             this.cartesianChartHumidity.Location = new System.Drawing.Point(36, 307);
             this.cartesianChartHumidity.Name = "cartesianChartHumidity";
-            this.cartesianChartHumidity.Size = new System.Drawing.Size(980, 170);
+            this.cartesianChartHumidity.Size = new System.Drawing.Size(479, 170);
             this.cartesianChartHumidity.TabIndex = 19;
             this.cartesianChartHumidity.Text = "cartesianChart1";
             // 
@@ -360,17 +390,17 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(57, 480);
+            this.label2.Location = new System.Drawing.Point(544, 287);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(65, 17);
+            this.label2.Size = new System.Drawing.Size(94, 17);
             this.label2.TabIndex = 16;
-            this.label2.Text = "Pressure";
+            this.label2.Text = "Pressure hPa";
             // 
             // cartesianChartPressure
             // 
-            this.cartesianChartPressure.Location = new System.Drawing.Point(36, 500);
+            this.cartesianChartPressure.Location = new System.Drawing.Point(521, 307);
             this.cartesianChartPressure.Name = "cartesianChartPressure";
-            this.cartesianChartPressure.Size = new System.Drawing.Size(980, 169);
+            this.cartesianChartPressure.Size = new System.Drawing.Size(500, 169);
             this.cartesianChartPressure.TabIndex = 15;
             this.cartesianChartPressure.Text = "cartesianChart1";
             // 
@@ -381,9 +411,9 @@
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(57, 97);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(95, 17);
+            this.label1.Size = new System.Drawing.Size(113, 17);
             this.label1.TabIndex = 14;
-            this.label1.Text = "Temperature";
+            this.label1.Text = "Temperature °C";
             // 
             // cartesianChartTemperature
             // 
@@ -393,16 +423,281 @@
             this.cartesianChartTemperature.TabIndex = 13;
             this.cartesianChartTemperature.Text = "cartesianChart1";
             // 
+            // groupBoxForecast
+            // 
+            this.groupBoxForecast.Controls.Add(this.textBoxForecast7details);
+            this.groupBoxForecast.Controls.Add(this.textBoxForecast6details);
+            this.groupBoxForecast.Controls.Add(this.textBoxForecast5details);
+            this.groupBoxForecast.Controls.Add(this.textBoxForecast4details);
+            this.groupBoxForecast.Controls.Add(this.textBoxForecast3details);
+            this.groupBoxForecast.Controls.Add(this.textBoxForecast2details);
+            this.groupBoxForecast.Controls.Add(this.textBoxForecast1details);
+            this.groupBoxForecast.Controls.Add(this.textBoxForecast7main);
+            this.groupBoxForecast.Controls.Add(this.textBoxForecast6main);
+            this.groupBoxForecast.Controls.Add(this.textBoxForecast5main);
+            this.groupBoxForecast.Controls.Add(this.textBoxForecast4main);
+            this.groupBoxForecast.Controls.Add(this.textBoxForecast3main);
+            this.groupBoxForecast.Controls.Add(this.textBoxForecast2main);
+            this.groupBoxForecast.Controls.Add(this.textBoxForecast1main);
+            this.groupBoxForecast.Controls.Add(this.pictureBoxForecast7);
+            this.groupBoxForecast.Controls.Add(this.pictureBoxForecast6);
+            this.groupBoxForecast.Controls.Add(this.pictureBoxForecast5);
+            this.groupBoxForecast.Controls.Add(this.pictureBoxForecast4);
+            this.groupBoxForecast.Controls.Add(this.pictureBoxForecast3);
+            this.groupBoxForecast.Controls.Add(this.pictureBoxForecast2);
+            this.groupBoxForecast.Controls.Add(this.pictureBoxForecast1);
+            this.groupBoxForecast.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.groupBoxForecast.ForeColor = System.Drawing.Color.White;
+            this.groupBoxForecast.Location = new System.Drawing.Point(48, 129);
+            this.groupBoxForecast.Name = "groupBoxForecast";
+            this.groupBoxForecast.Size = new System.Drawing.Size(1043, 119);
+            this.groupBoxForecast.TabIndex = 17;
+            this.groupBoxForecast.TabStop = false;
+            this.groupBoxForecast.Text = "Forecast Weather";
+            // 
+            // pictureBoxForecast7
+            // 
+            this.pictureBoxForecast7.Location = new System.Drawing.Point(869, 53);
+            this.pictureBoxForecast7.Name = "pictureBoxForecast7";
+            this.pictureBoxForecast7.Size = new System.Drawing.Size(50, 60);
+            this.pictureBoxForecast7.TabIndex = 28;
+            this.pictureBoxForecast7.TabStop = false;
+            // 
+            // pictureBoxForecast6
+            // 
+            this.pictureBoxForecast6.Location = new System.Drawing.Point(729, 53);
+            this.pictureBoxForecast6.Name = "pictureBoxForecast6";
+            this.pictureBoxForecast6.Size = new System.Drawing.Size(50, 60);
+            this.pictureBoxForecast6.TabIndex = 27;
+            this.pictureBoxForecast6.TabStop = false;
+            // 
+            // pictureBoxForecast5
+            // 
+            this.pictureBoxForecast5.Location = new System.Drawing.Point(588, 53);
+            this.pictureBoxForecast5.Name = "pictureBoxForecast5";
+            this.pictureBoxForecast5.Size = new System.Drawing.Size(50, 60);
+            this.pictureBoxForecast5.TabIndex = 26;
+            this.pictureBoxForecast5.TabStop = false;
+            // 
+            // pictureBoxForecast4
+            // 
+            this.pictureBoxForecast4.Location = new System.Drawing.Point(447, 53);
+            this.pictureBoxForecast4.Name = "pictureBoxForecast4";
+            this.pictureBoxForecast4.Size = new System.Drawing.Size(50, 60);
+            this.pictureBoxForecast4.TabIndex = 25;
+            this.pictureBoxForecast4.TabStop = false;
+            // 
+            // pictureBoxForecast3
+            // 
+            this.pictureBoxForecast3.Location = new System.Drawing.Point(306, 53);
+            this.pictureBoxForecast3.Name = "pictureBoxForecast3";
+            this.pictureBoxForecast3.Size = new System.Drawing.Size(50, 60);
+            this.pictureBoxForecast3.TabIndex = 24;
+            this.pictureBoxForecast3.TabStop = false;
+            // 
+            // pictureBoxForecast2
+            // 
+            this.pictureBoxForecast2.Location = new System.Drawing.Point(165, 53);
+            this.pictureBoxForecast2.Name = "pictureBoxForecast2";
+            this.pictureBoxForecast2.Size = new System.Drawing.Size(50, 60);
+            this.pictureBoxForecast2.TabIndex = 23;
+            this.pictureBoxForecast2.TabStop = false;
+            // 
+            // pictureBoxForecast1
+            // 
+            this.pictureBoxForecast1.Location = new System.Drawing.Point(24, 53);
+            this.pictureBoxForecast1.Name = "pictureBoxForecast1";
+            this.pictureBoxForecast1.Size = new System.Drawing.Size(50, 60);
+            this.pictureBoxForecast1.TabIndex = 22;
+            this.pictureBoxForecast1.TabStop = false;
+            // 
+            // textBoxForecast1main
+            // 
+            this.textBoxForecast1main.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.textBoxForecast1main.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxForecast1main.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.textBoxForecast1main.ForeColor = System.Drawing.Color.White;
+            this.textBoxForecast1main.Location = new System.Drawing.Point(24, 23);
+            this.textBoxForecast1main.Name = "textBoxForecast1main";
+            this.textBoxForecast1main.ReadOnly = true;
+            this.textBoxForecast1main.Size = new System.Drawing.Size(135, 24);
+            this.textBoxForecast1main.TabIndex = 29;
+            // 
+            // textBoxForecast2main
+            // 
+            this.textBoxForecast2main.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.textBoxForecast2main.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxForecast2main.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.textBoxForecast2main.ForeColor = System.Drawing.Color.White;
+            this.textBoxForecast2main.Location = new System.Drawing.Point(165, 23);
+            this.textBoxForecast2main.Name = "textBoxForecast2main";
+            this.textBoxForecast2main.ReadOnly = true;
+            this.textBoxForecast2main.Size = new System.Drawing.Size(135, 24);
+            this.textBoxForecast2main.TabIndex = 30;
+            // 
+            // textBoxForecast3main
+            // 
+            this.textBoxForecast3main.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.textBoxForecast3main.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxForecast3main.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.textBoxForecast3main.ForeColor = System.Drawing.Color.White;
+            this.textBoxForecast3main.Location = new System.Drawing.Point(306, 23);
+            this.textBoxForecast3main.Name = "textBoxForecast3main";
+            this.textBoxForecast3main.ReadOnly = true;
+            this.textBoxForecast3main.Size = new System.Drawing.Size(135, 24);
+            this.textBoxForecast3main.TabIndex = 31;
+            // 
+            // textBoxForecast4main
+            // 
+            this.textBoxForecast4main.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.textBoxForecast4main.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxForecast4main.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.textBoxForecast4main.ForeColor = System.Drawing.Color.White;
+            this.textBoxForecast4main.Location = new System.Drawing.Point(447, 23);
+            this.textBoxForecast4main.Name = "textBoxForecast4main";
+            this.textBoxForecast4main.ReadOnly = true;
+            this.textBoxForecast4main.Size = new System.Drawing.Size(135, 24);
+            this.textBoxForecast4main.TabIndex = 32;
+            // 
+            // textBoxForecast5main
+            // 
+            this.textBoxForecast5main.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.textBoxForecast5main.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxForecast5main.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.textBoxForecast5main.ForeColor = System.Drawing.Color.White;
+            this.textBoxForecast5main.Location = new System.Drawing.Point(588, 23);
+            this.textBoxForecast5main.Name = "textBoxForecast5main";
+            this.textBoxForecast5main.ReadOnly = true;
+            this.textBoxForecast5main.Size = new System.Drawing.Size(135, 24);
+            this.textBoxForecast5main.TabIndex = 33;
+            // 
+            // textBoxForecast6main
+            // 
+            this.textBoxForecast6main.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.textBoxForecast6main.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxForecast6main.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.textBoxForecast6main.ForeColor = System.Drawing.Color.White;
+            this.textBoxForecast6main.Location = new System.Drawing.Point(729, 23);
+            this.textBoxForecast6main.Name = "textBoxForecast6main";
+            this.textBoxForecast6main.ReadOnly = true;
+            this.textBoxForecast6main.Size = new System.Drawing.Size(135, 24);
+            this.textBoxForecast6main.TabIndex = 34;
+            // 
+            // textBoxForecast7main
+            // 
+            this.textBoxForecast7main.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.textBoxForecast7main.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxForecast7main.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.textBoxForecast7main.ForeColor = System.Drawing.Color.White;
+            this.textBoxForecast7main.Location = new System.Drawing.Point(870, 23);
+            this.textBoxForecast7main.Name = "textBoxForecast7main";
+            this.textBoxForecast7main.ReadOnly = true;
+            this.textBoxForecast7main.Size = new System.Drawing.Size(135, 24);
+            this.textBoxForecast7main.TabIndex = 35;
+            // 
+            // textBoxForecast1details
+            // 
+            this.textBoxForecast1details.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.textBoxForecast1details.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxForecast1details.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.textBoxForecast1details.ForeColor = System.Drawing.Color.White;
+            this.textBoxForecast1details.Location = new System.Drawing.Point(80, 53);
+            this.textBoxForecast1details.Multiline = true;
+            this.textBoxForecast1details.Name = "textBoxForecast1details";
+            this.textBoxForecast1details.ReadOnly = true;
+            this.textBoxForecast1details.Size = new System.Drawing.Size(79, 60);
+            this.textBoxForecast1details.TabIndex = 36;
+            // 
+            // textBoxForecast2details
+            // 
+            this.textBoxForecast2details.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.textBoxForecast2details.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxForecast2details.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.textBoxForecast2details.ForeColor = System.Drawing.Color.White;
+            this.textBoxForecast2details.Location = new System.Drawing.Point(221, 53);
+            this.textBoxForecast2details.Multiline = true;
+            this.textBoxForecast2details.Name = "textBoxForecast2details";
+            this.textBoxForecast2details.ReadOnly = true;
+            this.textBoxForecast2details.Size = new System.Drawing.Size(79, 60);
+            this.textBoxForecast2details.TabIndex = 37;
+            // 
+            // textBoxForecast3details
+            // 
+            this.textBoxForecast3details.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.textBoxForecast3details.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxForecast3details.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.textBoxForecast3details.ForeColor = System.Drawing.Color.White;
+            this.textBoxForecast3details.Location = new System.Drawing.Point(362, 53);
+            this.textBoxForecast3details.Multiline = true;
+            this.textBoxForecast3details.Name = "textBoxForecast3details";
+            this.textBoxForecast3details.ReadOnly = true;
+            this.textBoxForecast3details.Size = new System.Drawing.Size(79, 60);
+            this.textBoxForecast3details.TabIndex = 38;
+            // 
+            // textBoxForecast4details
+            // 
+            this.textBoxForecast4details.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.textBoxForecast4details.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxForecast4details.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.textBoxForecast4details.ForeColor = System.Drawing.Color.White;
+            this.textBoxForecast4details.Location = new System.Drawing.Point(503, 53);
+            this.textBoxForecast4details.Multiline = true;
+            this.textBoxForecast4details.Name = "textBoxForecast4details";
+            this.textBoxForecast4details.ReadOnly = true;
+            this.textBoxForecast4details.Size = new System.Drawing.Size(79, 60);
+            this.textBoxForecast4details.TabIndex = 39;
+            // 
+            // textBoxForecast5details
+            // 
+            this.textBoxForecast5details.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.textBoxForecast5details.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxForecast5details.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.textBoxForecast5details.ForeColor = System.Drawing.Color.White;
+            this.textBoxForecast5details.Location = new System.Drawing.Point(644, 53);
+            this.textBoxForecast5details.Multiline = true;
+            this.textBoxForecast5details.Name = "textBoxForecast5details";
+            this.textBoxForecast5details.ReadOnly = true;
+            this.textBoxForecast5details.Size = new System.Drawing.Size(79, 60);
+            this.textBoxForecast5details.TabIndex = 40;
+            // 
+            // textBoxForecast6details
+            // 
+            this.textBoxForecast6details.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.textBoxForecast6details.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxForecast6details.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.textBoxForecast6details.ForeColor = System.Drawing.Color.White;
+            this.textBoxForecast6details.Location = new System.Drawing.Point(785, 53);
+            this.textBoxForecast6details.Multiline = true;
+            this.textBoxForecast6details.Name = "textBoxForecast6details";
+            this.textBoxForecast6details.ReadOnly = true;
+            this.textBoxForecast6details.Size = new System.Drawing.Size(79, 60);
+            this.textBoxForecast6details.TabIndex = 41;
+            // 
+            // textBoxForecast7details
+            // 
+            this.textBoxForecast7details.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.textBoxForecast7details.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxForecast7details.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.textBoxForecast7details.ForeColor = System.Drawing.Color.White;
+            this.textBoxForecast7details.Location = new System.Drawing.Point(926, 53);
+            this.textBoxForecast7details.Multiline = true;
+            this.textBoxForecast7details.Name = "textBoxForecast7details";
+            this.textBoxForecast7details.ReadOnly = true;
+            this.textBoxForecast7details.Size = new System.Drawing.Size(79, 60);
+            this.textBoxForecast7details.TabIndex = 42;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(1131, 847);
+            this.ClientSize = new System.Drawing.Size(1131, 794);
+            this.Controls.Add(this.groupBoxForecast);
             this.Controls.Add(this.groupBoxIndor);
             this.Controls.Add(this.groupBoxCurrentWeather);
             this.ForeColor = System.Drawing.Color.White;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "FormMain";
             this.Text = "Weather Station";
             this.groupBoxCurrentWeather.ResumeLayout(false);
@@ -414,6 +709,15 @@
             this.groupBox1.PerformLayout();
             this.groupBoxRange.ResumeLayout(false);
             this.groupBoxRange.PerformLayout();
+            this.groupBoxForecast.ResumeLayout(false);
+            this.groupBoxForecast.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxForecast7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxForecast6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxForecast5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxForecast4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxForecast3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxForecast2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxForecast1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -445,6 +749,28 @@
         private LiveCharts.WinForms.CartesianChart cartesianChartTemperature;
         private System.Windows.Forms.Button buttonWeatherDetails;
         public System.Windows.Forms.ImageList imageListIcons;
+        private System.Windows.Forms.GroupBox groupBoxForecast;
+        private System.Windows.Forms.PictureBox pictureBoxForecast7;
+        private System.Windows.Forms.PictureBox pictureBoxForecast6;
+        private System.Windows.Forms.PictureBox pictureBoxForecast5;
+        private System.Windows.Forms.PictureBox pictureBoxForecast4;
+        private System.Windows.Forms.PictureBox pictureBoxForecast3;
+        private System.Windows.Forms.PictureBox pictureBoxForecast2;
+        private System.Windows.Forms.PictureBox pictureBoxForecast1;
+        private System.Windows.Forms.TextBox textBoxForecast7main;
+        private System.Windows.Forms.TextBox textBoxForecast6main;
+        private System.Windows.Forms.TextBox textBoxForecast5main;
+        private System.Windows.Forms.TextBox textBoxForecast4main;
+        private System.Windows.Forms.TextBox textBoxForecast3main;
+        private System.Windows.Forms.TextBox textBoxForecast2main;
+        private System.Windows.Forms.TextBox textBoxForecast1main;
+        private System.Windows.Forms.TextBox textBoxForecast1details;
+        private System.Windows.Forms.TextBox textBoxForecast7details;
+        private System.Windows.Forms.TextBox textBoxForecast6details;
+        private System.Windows.Forms.TextBox textBoxForecast5details;
+        private System.Windows.Forms.TextBox textBoxForecast4details;
+        private System.Windows.Forms.TextBox textBoxForecast3details;
+        private System.Windows.Forms.TextBox textBoxForecast2details;
     }
 }
 

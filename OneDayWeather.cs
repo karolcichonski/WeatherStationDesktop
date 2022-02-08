@@ -25,13 +25,41 @@ namespace WeatherStationDesctop
             WindDeg = currentWeather.wind.deg;
             WindGust = currentWeather.wind.gust * 3.6;
             CloudAll = currentWeather.clouds.all;
-            Country = currentWeather.sys.country;
+            //Country = currentWeather.sys.country;
             Sunrise = UnixTimestampConverter.GetCurrentDatetime(currentWeather.sys.sunrise);
             Sunset = UnixTimestampConverter.GetCurrentDatetime(currentWeather.sys.sunset);
             DateTime = UnixTimestampConverter.GetCurrentDatetime(currentWeather.dt);
             Timozene = currentWeather.timozene;
             Name = currentWeather.name;
-            Visibility = currentWeather.visibility;
+            //Visibility = currentWeather.visibility;
+        }
+
+        public OneDayWeather(OneCallWeather.OneCallWeatherDaily oneDayWeather, double lon, double lat, string timezone)
+        {
+            Lon = lon;
+            Lat = lat;
+            Main = oneDayWeather.weather[0].main;
+            Description = oneDayWeather.weather[0].description;
+            Icon = oneDayWeather.weather[0].icon;
+            Temp = oneDayWeather.temp.day;
+            Feels_like = oneDayWeather.feels_like.day;
+            Temp_min = oneDayWeather.temp.min;
+            Temp_max = oneDayWeather.temp.max;
+            Pressure = oneDayWeather.pressure;
+            Humidity = oneDayWeather.humidity;
+            WindSpeed = oneDayWeather.wind_speed * 3.6;
+            WindDeg = oneDayWeather.wind_deg;
+            WindGust = oneDayWeather.wind_gust * 3.6;
+            CloudAll = oneDayWeather.clouds;
+            //Country = oneDayWeather.sys.country;
+            Sunrise = UnixTimestampConverter.GetCurrentDatetime(oneDayWeather.sunrise);
+            Sunset = UnixTimestampConverter.GetCurrentDatetime(oneDayWeather.sunset);
+            DateTime = UnixTimestampConverter.GetCurrentDatetime(oneDayWeather.dt);
+            Timozene = timezone;
+            Rain = oneDayWeather.rain;
+            //Name = oneDayWeather.name;
+            //Visibility = oneDayWeather.visibility;
+
         }
 
         public double Lon { get; private set; }
@@ -48,7 +76,8 @@ namespace WeatherStationDesctop
         public double WindSpeed { get; private set; }
         public double WindDeg { get; private set; }
         public double WindGust { get; private set; }
-        public string CloudAll { get; private set; }
+        public double Rain { get; private set; }
+        public int CloudAll { get; private set; }
         public string Country { get; private set; }
         public DateTime Sunrise { get; private set; }
         public DateTime Sunset { get; private set; }

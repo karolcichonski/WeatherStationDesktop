@@ -13,28 +13,21 @@ namespace WeatherStationDesctop
     {
         public OpenWeatherMap()
         {
-            DailyWeather = new List<OneDayWeather>();
         }
 
-        List<OneDayWeather> DailyWeather;
-        OneDayWeather currentWeather;
-        CurrentWeather OWMcurrentWeather;
-        string json;
 
-        string httpRequest = $"https://api.openweathermap.org/data/2.5/weather?lat=50.2976&lon=18.6766&units=metric&appid={DBConnection.GetOpenWetherMapAPIKey()}";
-        
-        async public Task GenerateWeatherObject()
+        protected OneDayWeather currentWeather;
+        CurrentWeather OWMcurrentWeather;
+        protected string json;
+
+        protected string httpRequest = $"https://api.openweathermap.org/data/2.5/weather?lat=50.2976&lon=18.6766&units=metric&appid={DBConnection.GetOpenWetherMapAPIKey()}";
+
+        async virtual public Task GenerateWeatherObject()
         {
             await GettWeatherData(httpRequest);
             OWMcurrentWeather = JsonConvert.DeserializeObject<CurrentWeather>(json);
             OneDayWeather oneDayWeather = new OneDayWeather(OWMcurrentWeather);
-            DailyWeather.Add(oneDayWeather);
             currentWeather = oneDayWeather;
-        }
-
-        public List<OneDayWeather> GetDailyWeather()
-        {
-            return DailyWeather;
         }
 
         public OneDayWeather GetCurrentWeather()
@@ -42,7 +35,7 @@ namespace WeatherStationDesctop
             return currentWeather;
         }
 
-        private async Task  GettWeatherData(string httpRequest)
+        protected async Task  GettWeatherData(string httpRequest)
         {
             using (HttpClient httpClient = new HttpClient())
             {
@@ -84,7 +77,7 @@ namespace WeatherStationDesctop
         public Wind wind { get; set; }
         public class Clouds
         {
-            public string all { get; set; }
+            public int all { get; set; }
         }
 
         public Clouds clouds { get; set; }

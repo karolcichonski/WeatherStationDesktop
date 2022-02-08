@@ -47,7 +47,7 @@ namespace WeatherStationDesctop
 
                 if (TMP.Count() > 0)
                 {
-                    Pressure.Add(TMP.Average(X=>X.Press));
+                    Pressure.Add((TMP.Average(X=>X.Press))/100);
                     Temperature.Add(TMP.Average(X => X.Temp));
                     Humidity.Add(TMP.Average(X => X.Hum));
                 }
