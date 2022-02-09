@@ -124,7 +124,6 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="IconNumberGenerator.cs" />
     <Compile Include="Measurements.cs" />
     <Compile Include="OpenWeatherMap.cs" />
     <Compile Include="OpenWeatherMapForecast.cs" />

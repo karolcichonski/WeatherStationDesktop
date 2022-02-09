@@ -42,7 +42,15 @@ namespace WeatherStationDesctop
             Description = oneDayWeather.weather[0].description;
             Icon = oneDayWeather.weather[0].icon;
             Temp = oneDayWeather.temp.day;
+            TempDay = oneDayWeather.temp.day;
+            TempEve = oneDayWeather.temp.eve;
+            TempNight = oneDayWeather.temp.night;
+            TempMorning = oneDayWeather.temp.morn;
             Feels_like = oneDayWeather.feels_like.day;
+            TempFeelsDay = oneDayWeather.feels_like.day;
+            TempFeelsEve = oneDayWeather.feels_like.eve;
+            TempFeelsNight = oneDayWeather.feels_like.night;
+            TempFeelsMorning = oneDayWeather.feels_like.morn;
             Temp_min = oneDayWeather.temp.min;
             Temp_max = oneDayWeather.temp.max;
             Pressure = oneDayWeather.pressure;
@@ -51,12 +59,16 @@ namespace WeatherStationDesctop
             WindDeg = oneDayWeather.wind_deg;
             WindGust = oneDayWeather.wind_gust * 3.6;
             CloudAll = oneDayWeather.clouds;
-            //Country = oneDayWeather.sys.country;
             Sunrise = UnixTimestampConverter.GetCurrentDatetime(oneDayWeather.sunrise);
             Sunset = UnixTimestampConverter.GetCurrentDatetime(oneDayWeather.sunset);
+            Moonset= UnixTimestampConverter.GetCurrentDatetime(oneDayWeather.moonset);
+            Moonrise= UnixTimestampConverter.GetCurrentDatetime(oneDayWeather.moonrise);
             DateTime = UnixTimestampConverter.GetCurrentDatetime(oneDayWeather.dt);
+            Moonphase = oneDayWeather.moon_phase;
             Timozene = timezone;
             Rain = oneDayWeather.rain;
+            Snow = oneDayWeather.snow;
+
             //Name = oneDayWeather.name;
             //Visibility = oneDayWeather.visibility;
 
@@ -68,6 +80,14 @@ namespace WeatherStationDesctop
         public string Description { get; private set; }
         public string Icon { get; private set; }
         public double Temp { get; private set; }
+        public double TempDay { get; private set; }
+        public double TempNight { get; private set; }
+        public double TempEve { get; private set; }
+        public double TempMorning { get; private set; }
+        public double TempFeelsDay { get; private set; }
+        public double TempFeelsNight { get; private set; }
+        public double TempFeelsEve { get; private set; }
+        public double TempFeelsMorning { get; private set; }
         public double Feels_like { get; private set; }
         public double Temp_min { get; private set; }
         public double Temp_max { get; private set; }
@@ -77,13 +97,17 @@ namespace WeatherStationDesctop
         public double WindDeg { get; private set; }
         public double WindGust { get; private set; }
         public double Rain { get; private set; }
+        public double Snow { get; private set; }
         public int CloudAll { get; private set; }
-        public string Country { get; private set; }
         public DateTime Sunrise { get; private set; }
         public DateTime Sunset { get; private set; }
+        public DateTime Moonrise { get; private set; }
+        public DateTime Moonset { get; private set; }
+        public double Moonphase { get; private set; }
         public DateTime DateTime { get; private set; }
         public string Timozene { get; private set; }
         public int Visibility { get; private set; }
         public string Name { get; private set; }
+
     }
 }

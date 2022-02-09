@@ -19,14 +19,22 @@ namespace WeatherStationDesctop
             InitializeComponent();
 
             pictureBoxCurrentWeather.Image = imageListIcons.Images[icon];
-            textBoxLocation.Text = weather.Name;
             CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
             textBoxTime.Text = weather.DateTime.ToString("dddd, MMMM dd yyyy", culture);
             textBoxWeatherDesc.Text = weather.Main + ": " + weather.Description;
             textBoxSunrise.Text = $"Sunrise: {weather.Sunrise.ToString("t")}";
             textBoxSunset.Text = $"Sunset: {weather.Sunset.ToString("t")}";
+            textBoxMoonrise.Text = $"Moonrise: {weather.Moonrise.ToString("t")}";
+            textBoxMoonset.Text = $"Moonset: {weather.Moonset.ToString("t")}";
+            textBoxMoonPhase.Text = $"Phase: {weather.Moonphase.ToString()}";
             textBoxTemp.Text = weather.Temp.ToString() + "\u00b0 C";
+            textBoxTempEve.Text=weather.TempEve.ToString() + "\u00b0 C";
+            textBoxTempNight.Text=weather.TempNight.ToString() + "\u00b0 C";
+            textBoxTempMorning.Text=weather.TempMorning.ToString() + "\u00b0 C";
             textBoxTempFeels.Text = weather.Feels_like.ToString() + "\u00b0 C";
+            textBoxTempFeelsEve.Text = weather.TempFeelsEve.ToString() + "\u00b0 C";
+            textBoxTempFeelsNight.Text = weather.TempFeelsNight.ToString() + "\u00b0 C";
+            textBoxTempFeelsMorning.Text = weather.TempFeelsMorning.ToString() + "\u00b0 C";
             textBoxTempMin.Text = weather.Temp_min.ToString() + "\u00b0 C";
             textBoxTempMax.Text = weather.Temp_max.ToString() + "\u00b0 C";
             textBoxWindSpeed.Text = (weather.WindSpeed).ToString() + "km/h";
@@ -34,8 +42,9 @@ namespace WeatherStationDesctop
             textBoxWindDeg.Text = weather.WindDeg.ToString() + "\u00b0 C";
             textBoxPress.Text = weather.Pressure.ToString()+"hPa";
             textBoxHum.Text = weather.Humidity.ToString()+"%";
-            textBoxVis.Text = weather.Visibility.ToString() + "m";
             textBoxClouds.Text = weather.CloudAll.ToString()+"%";
+            textBoxRain.Text = $"Rain: {weather.Rain.ToString() }";
+            textBoxSnow.Text = $"Snow: {weather.Snow.ToString() }";
 
 
 

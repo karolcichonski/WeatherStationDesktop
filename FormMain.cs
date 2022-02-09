@@ -19,9 +19,11 @@ namespace WeatherStationDesktop
         Measurements measurements;
         OneDayWeather currentWeather;
         CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
-
         List<RadioButton> LastRange = new List<RadioButton>();
+        List<OneDayWeather> ForecastWeaders = new List<OneDayWeather>();
         int? iconNumber;
+
+
         public FormMain()
         {
             InitializeComponent();
@@ -38,20 +40,20 @@ namespace WeatherStationDesktop
             else
             {
                 MessageBox.Show("Database is out of range! Please check internet connection.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-               // System.Environment.Exit(0);
             }
 
-            UpdateWather();
             UpdateWeatherForecast();
 
 
         }
 
-        async Task UpdateWather()
+
+        async Task UpdateWeatherForecast()
         {
-            OpenWeatherMap OpenWeatherMap = new OpenWeatherMap();
-            await OpenWeatherMap.GenerateWeatherObject();
-            currentWeather = OpenWeatherMap.GetCurrentWeather();
+            OpenWeatherMapForecast openWeatherMapForecast = new OpenWeatherMapForecast();
+            await openWeatherMapForecast.GenerateWeatherObject();
+            ForecastWeaders = openWeatherMapForecast.GetDailyWeather();
+            currentWeather = ForecastWeaders[0];
             textBoxWeatherTime.Text = currentWeather.DateTime.ToString("dddd, MMMM dd yyyy", culture);
             textBoxWeatherDesc.Text = currentWeather.Description;
             textBoxWeatherTemp.Text = $"Temperature: {currentWeather.Temp}\u00b0 C";
@@ -59,86 +61,28 @@ namespace WeatherStationDesktop
             textBoxWeatherPress.Text = $"Pressure: {currentWeather.Pressure} hPa";
             textBoxWeatherWind.Text = $"Wind: {currentWeather.WindSpeed} km/h";
             iconNumber = GetImageCode(currentWeather.Icon);
-            if(iconNumber != null) pictureBoxCurrentWeather.Image = imageListIcons.Images[(int)iconNumber];
-        }
-
-        async Task UpdateWeatherForecast()
-        {
-            OpenWeatherMapForecast openWeatherMapForecast = new OpenWeatherMapForecast();
-            await openWeatherMapForecast.GenerateWeatherObject();
-            List<OneDayWeather> ForecastWeaders = openWeatherMapForecast.GetDailyWeather();
-            pictureBoxForecast1.Image = imageListIcons.Images[(int)GetImageCode(ForecastWeaders[1].Icon)];
-            textBoxForecast1main.Text = ForecastWeaders[1].DateTime.ToString("dddd",culture);
-            textBoxForecast1main.Text += $": {ForecastWeaders[1].Main}";
-            textBoxForecast1details.AppendText( $"T: {ForecastWeaders[1].Temp.ToString()}\u00b0 C");
-            textBoxForecast1details.AppendText(Environment.NewLine);
-            textBoxForecast1details.AppendText($"H: {ForecastWeaders[1].Humidity.ToString()} %");
-            textBoxForecast1details.AppendText(Environment.NewLine);
-            textBoxForecast1details.AppendText($"W: {Math.Round(ForecastWeaders[1].WindSpeed).ToString()} km/h");
-            textBoxForecast1details.AppendText(Environment.NewLine);
-            textBoxForecast1details.AppendText($"R: {ForecastWeaders[1].Rain} mm");
-            pictureBoxForecast2.Image = imageListIcons.Images[(int)GetImageCode(ForecastWeaders[2].Icon)];
-            textBoxForecast2main.Text = ForecastWeaders[2].DateTime.ToString("dddd",culture);
-            textBoxForecast2main.Text += $": {ForecastWeaders[2].Main}";
-            textBoxForecast2details.AppendText($"T: {ForecastWeaders[2].Temp.ToString()}\u00b0 C");
-            textBoxForecast2details.AppendText(Environment.NewLine);
-            textBoxForecast2details.AppendText($"H: {ForecastWeaders[2].Humidity.ToString()} %");
-            textBoxForecast2details.AppendText(Environment.NewLine);
-            textBoxForecast2details.AppendText($"W: {Math.Round(ForecastWeaders[2].WindSpeed).ToString()} km/h");
-            textBoxForecast2details.AppendText(Environment.NewLine);
-            textBoxForecast2details.AppendText($"R: {ForecastWeaders[2].Rain} mm");
-            pictureBoxForecast3.Image = imageListIcons.Images[(int)GetImageCode(ForecastWeaders[3].Icon)];
-            textBoxForecast3main.Text = ForecastWeaders[3].DateTime.ToString("dddd", culture);
-            textBoxForecast3main.Text += $": {ForecastWeaders[3].Main}";
-            textBoxForecast3details.AppendText($"T: {ForecastWeaders[3].Temp.ToString()}\u00b0 C");
-            textBoxForecast3details.AppendText(Environment.NewLine);
-            textBoxForecast3details.AppendText($"H: {ForecastWeaders[3].Humidity.ToString()} %");
-            textBoxForecast3details.AppendText(Environment.NewLine);
-            textBoxForecast3details.AppendText($"W: {Math.Round(ForecastWeaders[3].WindSpeed).ToString()} km/h");
-            textBoxForecast3details.AppendText(Environment.NewLine);
-            textBoxForecast3details.AppendText($"R: {ForecastWeaders[3].Rain} mm");
-            pictureBoxForecast4.Image = imageListIcons.Images[(int)GetImageCode(ForecastWeaders[4].Icon)];
-            textBoxForecast4main.Text = ForecastWeaders[4].DateTime.ToString("dddd", culture);
-            textBoxForecast4main.Text += $": {ForecastWeaders[4].Main}";
-            textBoxForecast4details.AppendText($"T: {ForecastWeaders[4].Temp.ToString()}\u00b0 C");
-            textBoxForecast4details.AppendText(Environment.NewLine);
-            textBoxForecast4details.AppendText($"H: {ForecastWeaders[4].Humidity.ToString()} %");
-            textBoxForecast4details.AppendText(Environment.NewLine);
-            textBoxForecast4details.AppendText($"W: {Math.Round(ForecastWeaders[4].WindSpeed).ToString()} km/h");
-            textBoxForecast4details.AppendText(Environment.NewLine);
-            textBoxForecast4details.AppendText($"R: {ForecastWeaders[4].Rain} mm");
-            pictureBoxForecast5.Image = imageListIcons.Images[(int)GetImageCode(ForecastWeaders[5].Icon)];
-            textBoxForecast5main.Text = ForecastWeaders[5].DateTime.ToString("dddd", culture);
-            textBoxForecast5main.Text += $": {ForecastWeaders[5].Main}";
-            textBoxForecast5details.AppendText($"T: {ForecastWeaders[5].Temp.ToString()}\u00b0 C");
-            textBoxForecast5details.AppendText(Environment.NewLine);
-            textBoxForecast5details.AppendText($"H: {ForecastWeaders[5].Humidity.ToString()} %");
-            textBoxForecast5details.AppendText(Environment.NewLine);
-            textBoxForecast5details.AppendText($"W: {Math.Round(ForecastWeaders[5].WindSpeed).ToString()} km/h");
-            textBoxForecast5details.AppendText(Environment.NewLine);
-            textBoxForecast5details.AppendText($"R: {ForecastWeaders[5].Rain} mm");
-            pictureBoxForecast6.Image = imageListIcons.Images[(int)GetImageCode(ForecastWeaders[6].Icon)];
-            textBoxForecast6main.Text = ForecastWeaders[6].DateTime.ToString("dddd", culture);
-            textBoxForecast6main.Text += $": {ForecastWeaders[6].Main}";
-            textBoxForecast6details.AppendText($"T: {ForecastWeaders[6].Temp.ToString()}\u00b0 C");
-            textBoxForecast6details.AppendText(Environment.NewLine);
-            textBoxForecast6details.AppendText($"H: {ForecastWeaders[6].Humidity.ToString()} %");
-            textBoxForecast6details.AppendText(Environment.NewLine);
-            textBoxForecast6details.AppendText($"W: {Math.Round(ForecastWeaders[6].WindSpeed).ToString()} km/h");
-            textBoxForecast6details.AppendText(Environment.NewLine);
-            textBoxForecast6details.AppendText($"R: {ForecastWeaders[6].Rain} mm");
-            pictureBoxForecast7.Image = imageListIcons.Images[(int)GetImageCode(ForecastWeaders[7].Icon)];
-            textBoxForecast7main.Text = ForecastWeaders[7].DateTime.ToString("dddd", culture);
-            textBoxForecast7main.Text += $": {ForecastWeaders[7].Main}";
-            textBoxForecast7details.AppendText($"T: {ForecastWeaders[7].Temp.ToString()}\u00b0 C");
-            textBoxForecast7details.AppendText(Environment.NewLine);
-            textBoxForecast7details.AppendText($"H: {ForecastWeaders[7].Humidity.ToString()} %");
-            textBoxForecast7details.AppendText(Environment.NewLine);
-            textBoxForecast7details.AppendText($"W: {Math.Round(ForecastWeaders[7].WindSpeed).ToString()} km/h");
-            textBoxForecast7details.AppendText(Environment.NewLine);
-            textBoxForecast7details.AppendText($"R: {ForecastWeaders[7].Rain} mm");
+            if (iconNumber != null) pictureBoxCurrentWeather.Image = imageListIcons.Images[(int)iconNumber];
 
 
+            for (int i=1;i<=7; i++)
+            {
+                Control[] controls=this.Controls.Find($"pictureBoxForecast{i}",true);
+                PictureBox pictureBox = (PictureBox)controls[0] ;
+                controls = this.Controls.Find($"textBoxForecast{i}main", true);
+                TextBox textBoxMain = (TextBox)controls[0];
+                controls = this.Controls.Find($"textBoxForecast{i}details", true);
+                TextBox textBoxDetails = (TextBox)controls[0];
+                pictureBox.Image = imageListIcons.Images[(int)GetImageCode(ForecastWeaders[i].Icon)];
+                textBoxMain.Text = ForecastWeaders[i].DateTime.ToString("dddd", culture);
+                textBoxMain.Text += $": {ForecastWeaders[i].Main}";
+                textBoxDetails.AppendText($"T: {ForecastWeaders[i].Temp.ToString()}\u00b0 C");
+                textBoxDetails.AppendText(Environment.NewLine);
+                textBoxDetails.AppendText($"W: {Math.Round(ForecastWeaders[i].WindSpeed).ToString()} km/h");
+                textBoxDetails.AppendText(Environment.NewLine);
+                textBoxDetails.AppendText($"R: {ForecastWeaders[i].Rain} mm");
+                textBoxDetails.AppendText(Environment.NewLine);
+                textBoxDetails.AppendText($"S: {ForecastWeaders[i].Snow} mm");
+            }
         }
 
         bool UpdateCharts()
@@ -184,12 +128,11 @@ namespace WeatherStationDesktop
                 TempSet.Stroke = System.Windows.Media.Brushes.Red;
                 TempSeries.Add(TempSet);
                 cartesianChartTemperature.Series = TempSeries;
-                Axis axPress = new Axis() { Separator = new Separator() { Step = 12 } };
-               // Axis ayPress = new Axis() { MinValue = 95000, MaxValue = 101000 };
+                Axis axPress = new Axis() { Separator = new Separator() { Step = 24 } };
                 axPress.Labels = chartsDatas.TimesLabels;
                 Axis axTem = new Axis() { Separator = new Separator() { Step = 12 } };
                 axTem.Labels = chartsDatas.TimesLabels;
-                Axis axHum = new Axis() { Separator = new Separator() { Step = 12 } };
+                Axis axHum = new Axis() { Separator = new Separator() { Step = 24 } };
                 axHum.Labels = chartsDatas.TimesLabels;
 
                 cartesianChartPressure.AxisX.Add(axPress);
@@ -273,6 +216,48 @@ namespace WeatherStationDesktop
         private void buttonWeatherDetails_Click(object sender, EventArgs e)
         {
             FormCurrentWeather currentWeatherForm = new FormCurrentWeather(currentWeather, (int)iconNumber);
+            currentWeatherForm.Show();
+        }
+
+        private void pictureBoxForecast1_Click(object sender, EventArgs e)
+        {
+            FormCurrentWeather currentWeatherForm = new FormCurrentWeather(ForecastWeaders[1], (int)GetImageCode(ForecastWeaders[1].Icon));
+            currentWeatherForm.Show();
+        }
+
+        private void pictureBoxForecast2_Click(object sender, EventArgs e)
+        {
+            FormCurrentWeather currentWeatherForm = new FormCurrentWeather(ForecastWeaders[2], (int)GetImageCode(ForecastWeaders[2].Icon));
+            currentWeatherForm.Show();
+        }
+
+        private void pictureBoxForecast3_Click(object sender, EventArgs e)
+        {
+            FormCurrentWeather currentWeatherForm = new FormCurrentWeather(ForecastWeaders[3], (int)GetImageCode(ForecastWeaders[3].Icon));
+            currentWeatherForm.Show();
+        }
+
+        private void pictureBoxForecast4_Click(object sender, EventArgs e)
+        {
+            FormCurrentWeather currentWeatherForm = new FormCurrentWeather(ForecastWeaders[4], (int)GetImageCode(ForecastWeaders[4].Icon));
+            currentWeatherForm.Show();
+        }
+
+        private void pictureBoxForecast5_Click(object sender, EventArgs e)
+        {
+            FormCurrentWeather currentWeatherForm = new FormCurrentWeather(ForecastWeaders[5], (int)GetImageCode(ForecastWeaders[5].Icon));
+            currentWeatherForm.Show();
+        }
+
+        private void pictureBoxForecast6_Click(object sender, EventArgs e)
+        {
+            FormCurrentWeather currentWeatherForm = new FormCurrentWeather(ForecastWeaders[6], (int)GetImageCode(ForecastWeaders[6].Icon));
+            currentWeatherForm.Show();
+        }
+
+        private void pictureBoxForecast7_Click(object sender, EventArgs e)
+        {
+            FormCurrentWeather currentWeatherForm = new FormCurrentWeather(ForecastWeaders[7], (int)GetImageCode(ForecastWeaders[7].Icon));
             currentWeatherForm.Show();
         }
     }
