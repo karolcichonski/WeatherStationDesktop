@@ -21,12 +21,16 @@ namespace WeatherStationDesctop
 
         async override public Task GenerateWeatherObject()
         {
-            await GettWeatherData(httpRequest);
-            OneCallWeather = JsonConvert.DeserializeObject<OneCallWeather>(json);
-            foreach(OneCallWeather.OneCallWeatherDaily weatherDaily in OneCallWeather.daily)
+
+                await GettWeatherData(httpRequest);
+            if (httpStatusCode == 200 & json != null)
             {
-                OneDayWeather oneDayWeather = new OneDayWeather(weatherDaily, OneCallWeather.lon, OneCallWeather.lat, OneCallWeather.timezone);
-                DailyWeather.Add(oneDayWeather);
+                OneCallWeather = JsonConvert.DeserializeObject<OneCallWeather>(json);
+                foreach (OneCallWeather.OneCallWeatherDaily weatherDaily in OneCallWeather.daily)
+                {
+                    OneDayWeather oneDayWeather = new OneDayWeather(weatherDaily, OneCallWeather.lon, OneCallWeather.lat, OneCallWeather.timezone);
+                    DailyWeather.Add(oneDayWeather);
+                }
             }
         }
 

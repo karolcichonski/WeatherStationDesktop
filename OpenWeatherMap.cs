@@ -15,7 +15,7 @@ namespace WeatherStationDesctop
         {
         }
 
-
+        public int httpStatusCode { get; protected set;}
         protected OneDayWeather currentWeather;
         CurrentWeather OWMcurrentWeather;
         protected string json;
@@ -24,10 +24,14 @@ namespace WeatherStationDesctop
 
         async virtual public Task GenerateWeatherObject()
         {
-            await GettWeatherData(httpRequest);
-            OWMcurrentWeather = JsonConvert.DeserializeObject<CurrentWeather>(json);
-            OneDayWeather oneDayWeather = new OneDayWeather(OWMcurrentWeather);
-            currentWeather = oneDayWeather;
+
+                await GettWeatherData(httpRequest);
+            if (httpStatusCode == 200 & json != null)
+            {
+                OWMcurrentWeather = JsonConvert.DeserializeObject<CurrentWeather>(json);
+                OneDayWeather oneDayWeather = new OneDayWeather(OWMcurrentWeather);
+                currentWeather = oneDayWeather;
+            }
         }
 
         public OneDayWeather GetCurrentWeather()
@@ -40,7 +44,11 @@ namespace WeatherStationDesctop
             using (HttpClient httpClient = new HttpClient())
             {
                 var result= await httpClient.GetAsync(httpRequest);
-                json = await result.Content.ReadAsStringAsync();
+                httpStatusCode = (int)result.StatusCode;
+                if (httpStatusCode == 200)
+                {
+                    json = await result.Content.ReadAsStringAsync();
+                }
             }
         }
         

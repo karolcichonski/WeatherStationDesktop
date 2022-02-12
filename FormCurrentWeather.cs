@@ -39,7 +39,7 @@ namespace WeatherStationDesctop
             textBoxTempMax.Text = weather.Temp_max.ToString() + "\u00b0 C";
             textBoxWindSpeed.Text = (weather.WindSpeed).ToString() + "km/h";
             textBoxWindGust.Text = (weather.WindGust).ToString() + "km/h";
-            textBoxWindDeg.Text = weather.WindDeg.ToString() + "\u00b0 C";
+            textBoxWindDeg.Text = weather.WindDeg.ToString() + "\u00b0";
             textBoxPress.Text = weather.Pressure.ToString()+"hPa";
             textBoxHum.Text = weather.Humidity.ToString()+"%";
             textBoxClouds.Text = weather.CloudAll.ToString()+"%";

@@ -22,6 +22,7 @@ namespace WeatherStationDesktop
         List<RadioButton> LastRange = new List<RadioButton>();
         List<OneDayWeather> ForecastWeaders = new List<OneDayWeather>();
         int? iconNumber;
+        int openWeatherMapConnecionStatus;
 
 
         public FormMain()
@@ -53,6 +54,13 @@ namespace WeatherStationDesktop
             OpenWeatherMapForecast openWeatherMapForecast = new OpenWeatherMapForecast();
             await openWeatherMapForecast.GenerateWeatherObject();
             ForecastWeaders = openWeatherMapForecast.GetDailyWeather();
+            openWeatherMapConnecionStatus = openWeatherMapForecast.httpStatusCode;
+            if (openWeatherMapForecast.httpStatusCode != 200)
+            {
+                MessageBox.Show($"Failed connection to Open Weather Map API! code {openWeatherMapForecast.httpStatusCode}", $"Error {openWeatherMapForecast.httpStatusCode}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            } 
+
             currentWeather = ForecastWeaders[0];
             textBoxWeatherTime.Text = currentWeather.DateTime.ToString("dddd, MMMM dd yyyy", culture);
             textBoxWeatherDesc.Text = currentWeather.Description;
@@ -62,7 +70,7 @@ namespace WeatherStationDesktop
             textBoxWeatherWind.Text = $"Wind: {currentWeather.WindSpeed} km/h";
             iconNumber = GetImageCode(currentWeather.Icon);
             if (iconNumber != null) pictureBoxCurrentWeather.Image = imageListIcons.Images[(int)iconNumber];
-
+            buttonWeatherDetails.Enabled = true;
 
             for (int i=1;i<=7; i++)
             {
@@ -221,44 +229,66 @@ namespace WeatherStationDesktop
 
         private void pictureBoxForecast1_Click(object sender, EventArgs e)
         {
-            FormCurrentWeather currentWeatherForm = new FormCurrentWeather(ForecastWeaders[1], (int)GetImageCode(ForecastWeaders[1].Icon));
-            currentWeatherForm.Show();
+            if (openWeatherMapConnecionStatus == 200)
+            {
+                FormCurrentWeather currentWeatherForm = new FormCurrentWeather(ForecastWeaders[1], (int)GetImageCode(ForecastWeaders[1].Icon));
+                currentWeatherForm.Show();
+            }
+
         }
 
         private void pictureBoxForecast2_Click(object sender, EventArgs e)
         {
-            FormCurrentWeather currentWeatherForm = new FormCurrentWeather(ForecastWeaders[2], (int)GetImageCode(ForecastWeaders[2].Icon));
-            currentWeatherForm.Show();
+            if (openWeatherMapConnecionStatus == 200)
+            {
+                FormCurrentWeather currentWeatherForm = new FormCurrentWeather(ForecastWeaders[2], (int)GetImageCode(ForecastWeaders[2].Icon));
+                currentWeatherForm.Show();
+            }
         }
 
         private void pictureBoxForecast3_Click(object sender, EventArgs e)
         {
-            FormCurrentWeather currentWeatherForm = new FormCurrentWeather(ForecastWeaders[3], (int)GetImageCode(ForecastWeaders[3].Icon));
-            currentWeatherForm.Show();
+            if (openWeatherMapConnecionStatus == 200)
+            {
+                FormCurrentWeather currentWeatherForm = new FormCurrentWeather(ForecastWeaders[3], (int)GetImageCode(ForecastWeaders[3].Icon));
+                currentWeatherForm.Show();
+            }
         }
 
         private void pictureBoxForecast4_Click(object sender, EventArgs e)
         {
-            FormCurrentWeather currentWeatherForm = new FormCurrentWeather(ForecastWeaders[4], (int)GetImageCode(ForecastWeaders[4].Icon));
-            currentWeatherForm.Show();
+            if (openWeatherMapConnecionStatus == 200)
+            {
+                FormCurrentWeather currentWeatherForm = new FormCurrentWeather(ForecastWeaders[4], (int)GetImageCode(ForecastWeaders[4].Icon));
+                currentWeatherForm.Show();
+            }
         }
 
         private void pictureBoxForecast5_Click(object sender, EventArgs e)
         {
-            FormCurrentWeather currentWeatherForm = new FormCurrentWeather(ForecastWeaders[5], (int)GetImageCode(ForecastWeaders[5].Icon));
-            currentWeatherForm.Show();
+            if (openWeatherMapConnecionStatus == 200)
+            {
+                FormCurrentWeather currentWeatherForm = new FormCurrentWeather(ForecastWeaders[5], (int)GetImageCode(ForecastWeaders[5].Icon));
+                currentWeatherForm.Show();
+            }
         }
 
         private void pictureBoxForecast6_Click(object sender, EventArgs e)
         {
-            FormCurrentWeather currentWeatherForm = new FormCurrentWeather(ForecastWeaders[6], (int)GetImageCode(ForecastWeaders[6].Icon));
-            currentWeatherForm.Show();
+            if (openWeatherMapConnecionStatus == 200)
+            {
+                FormCurrentWeather currentWeatherForm = new FormCurrentWeather(ForecastWeaders[6], (int)GetImageCode(ForecastWeaders[6].Icon));
+                currentWeatherForm.Show();
+            }
         }
 
         private void pictureBoxForecast7_Click(object sender, EventArgs e)
         {
-            FormCurrentWeather currentWeatherForm = new FormCurrentWeather(ForecastWeaders[7], (int)GetImageCode(ForecastWeaders[7].Icon));
-            currentWeatherForm.Show();
+            if (openWeatherMapConnecionStatus == 200)
+            {
+                FormCurrentWeather currentWeatherForm = new FormCurrentWeather(ForecastWeaders[7], (int)GetImageCode(ForecastWeaders[7].Icon));
+                currentWeatherForm.Show();
+            }
         }
     }
 }

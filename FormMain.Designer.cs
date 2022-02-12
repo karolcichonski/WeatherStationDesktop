@@ -116,6 +116,7 @@
             // 
             this.buttonWeatherDetails.BackColor = System.Drawing.Color.Gray;
             this.buttonWeatherDetails.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonWeatherDetails.Enabled = false;
             this.buttonWeatherDetails.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonWeatherDetails.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.buttonWeatherDetails.Location = new System.Drawing.Point(901, 37);
