@@ -74,6 +74,25 @@ namespace WeatherStationDesctop
 
         }
 
+        public OneDayWeather(OneCallWeather.OneCallWeatherHourly oneDayWeather, double lon, double lat, string timezone)
+        {
+            Lon = lon;
+            Lat = lat;
+            Main = oneDayWeather.weather[0].main;
+            Description = oneDayWeather.weather[0].description;
+            Icon = oneDayWeather.weather[0].icon;
+            Temp = oneDayWeather.temp;
+            Feels_like = oneDayWeather.feels_like;
+            Pressure = oneDayWeather.pressure;
+            Humidity = oneDayWeather.humidity;
+            WindSpeed = oneDayWeather.wind_speed * 3.6;
+            WindDeg = oneDayWeather.wind_deg;
+            WindGust = oneDayWeather.wind_gust * 3.6;
+            CloudAll = oneDayWeather.clouds;
+            DateTime = UnixTimestampConverter.GetCurrentDatetime(oneDayWeather.dt);
+            Timozene = timezone;
+        }
+
         public double Lon { get; private set; }
         public double Lat { get; private set; }
         public string Main { get; private set; }

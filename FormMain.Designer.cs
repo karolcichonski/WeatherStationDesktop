@@ -41,6 +41,7 @@
             this.textBoxWeatherTime = new System.Windows.Forms.TextBox();
             this.imageListIcons = new System.Windows.Forms.ImageList(this.components);
             this.groupBoxIndor = new System.Windows.Forms.GroupBox();
+            this.buttonHist = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.cartesianChartHumidity = new LiveCharts.WinForms.CartesianChart();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -95,6 +96,7 @@
             // 
             // groupBoxCurrentWeather
             // 
+            this.groupBoxCurrentWeather.Controls.Add(this.buttonHist);
             this.groupBoxCurrentWeather.Controls.Add(this.buttonWeatherDetails);
             this.groupBoxCurrentWeather.Controls.Add(this.pictureBoxCurrentWeather);
             this.groupBoxCurrentWeather.Controls.Add(this.textBoxWeatherWind);
@@ -119,7 +121,7 @@
             this.buttonWeatherDetails.Enabled = false;
             this.buttonWeatherDetails.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonWeatherDetails.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.buttonWeatherDetails.Location = new System.Drawing.Point(901, 37);
+            this.buttonWeatherDetails.Location = new System.Drawing.Point(902, 22);
             this.buttonWeatherDetails.Name = "buttonWeatherDetails";
             this.buttonWeatherDetails.Size = new System.Drawing.Size(75, 23);
             this.buttonWeatherDetails.TabIndex = 22;
@@ -260,6 +262,18 @@
             this.groupBoxIndor.TabIndex = 16;
             this.groupBoxIndor.TabStop = false;
             this.groupBoxIndor.Text = "Indor Measurements";
+            // 
+            // buttonHist
+            // 
+            this.buttonHist.BackColor = System.Drawing.Color.Gray;
+            this.buttonHist.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonHist.Location = new System.Drawing.Point(902, 54);
+            this.buttonHist.Name = "buttonHist";
+            this.buttonHist.Size = new System.Drawing.Size(103, 23);
+            this.buttonHist.TabIndex = 21;
+            this.buttonHist.Text = "Historical";
+            this.buttonHist.UseVisualStyleBackColor = false;
+            this.buttonHist.Click += new System.EventHandler(this.buttonHist_Click);
             // 
             // label6
             // 
@@ -837,6 +851,7 @@
         private System.Windows.Forms.TextBox textBoxForecast4details;
         private System.Windows.Forms.TextBox textBoxForecast3details;
         private System.Windows.Forms.TextBox textBoxForecast2details;
+        private System.Windows.Forms.Button buttonHist;
     }
 }
 

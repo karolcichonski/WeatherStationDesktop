@@ -13,12 +13,14 @@ namespace WeatherStationDesctop
         public OpenWeatherMapForecast()
         {
             DailyWeather = new List<OneDayWeather>();
+            HourlyWeather = new List<OneDayWeather>();
         }
 
         OneCallWeather OneCallWeather;
         List<OneDayWeather> DailyWeather;
+        public List<OneDayWeather> HourlyWeather;
         string httpRequest = $"https://api.openweathermap.org/data/2.5/onecall?lat=50.2976&lon=18.6766&units=metric&appid={DBConnection.GetOpenWetherMapAPIKey()}";
-
+        //string httpRequest = $"https://api.openweathermap.org/data/2.5/onecall/timemachine?lat=50.2976&lon=18.6766&dt={UnixTimestampConverter.GetNDaysAgo(5)}&units=metric&appid={DBConnection.GetOpenWetherMapAPIKey()}";
         async override public Task GenerateWeatherObject()
         {
 
@@ -30,6 +32,11 @@ namespace WeatherStationDesctop
                 {
                     OneDayWeather oneDayWeather = new OneDayWeather(weatherDaily, OneCallWeather.lon, OneCallWeather.lat, OneCallWeather.timezone);
                     DailyWeather.Add(oneDayWeather);
+                }
+                foreach (OneCallWeather.OneCallWeatherHourly weatherHourly in OneCallWeather.hourly)
+                {
+                    OneDayWeather oneDayWeather = new OneDayWeather(weatherHourly, OneCallWeather.lon, OneCallWeather.lat, OneCallWeather.timezone);
+                    HourlyWeather.Add(oneDayWeather);
                 }
             }
         }

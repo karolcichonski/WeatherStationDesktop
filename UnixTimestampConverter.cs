@@ -14,5 +14,13 @@ namespace WeatherStationDesctop
             dateTime = dateTime.AddSeconds(unixTimestamp).ToLocalTime();
             return dateTime;
         }
+
+        public static int GetNDaysAgo(int daysAgo)
+        {
+            DateTime fiveDaysAgo = DateTime.Now.AddDays(-daysAgo);
+            DateTime unixStart = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            TimeSpan diff = fiveDaysAgo.ToUniversalTime() - unixStart;
+            return (int)diff.TotalSeconds;
+        }
     }
 }

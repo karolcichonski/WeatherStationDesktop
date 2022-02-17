@@ -51,6 +51,8 @@ namespace WeatherStationDesktop
 
         async Task UpdateWeatherForecast()
         {
+            OpenWeatherMapHistorical openWeatherMapHistorical = new OpenWeatherMapHistorical();
+            await openWeatherMapHistorical.GenerateWeatherObject();
             OpenWeatherMapForecast openWeatherMapForecast = new OpenWeatherMapForecast();
             await openWeatherMapForecast.GenerateWeatherObject();
             ForecastWeaders = openWeatherMapForecast.GetDailyWeather();
@@ -289,6 +291,12 @@ namespace WeatherStationDesktop
                 FormCurrentWeather currentWeatherForm = new FormCurrentWeather(ForecastWeaders[7], (int)GetImageCode(ForecastWeaders[7].Icon));
                 currentWeatherForm.Show();
             }
+        }
+
+        private void buttonHist_Click(object sender, EventArgs e)
+        {
+            FormHistoricalWeater formHistoricalWeater = new FormHistoricalWeater();
+            formHistoricalWeater.Show();
         }
     }
 }

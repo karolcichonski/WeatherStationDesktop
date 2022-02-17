@@ -110,6 +110,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChartsDatas.cs" />
+    <Compile Include="FormHistoricalWeater.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormHistoricalWeater.Designer.cs">
+      <DependentUpon>FormHistoricalWeater.cs</DependentUpon>
+    </Compile>
     <Compile Include="OneDayWeather.cs" />
     <Compile Include="DBConnection.cs" />
     <Compile Include="FormCurrentWeather.cs">
@@ -127,6 +133,7 @@
     <Compile Include="Measurements.cs" />
     <Compile Include="OpenWeatherMap.cs" />
     <Compile Include="OpenWeatherMapForecast.cs" />
+    <Compile Include="OpenWeatherMapHistorical.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnixTimestampConverter.cs" />
@@ -135,6 +142,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormHistoricalWeater.resx">
+      <DependentUpon>FormHistoricalWeater.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
