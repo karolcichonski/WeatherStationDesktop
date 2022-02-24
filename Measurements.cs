@@ -14,7 +14,7 @@ namespace WeatherStationDesktop
         {
             if (GetMeasurementsFromDB(query))
             {
-                LastTemp = AllMeasurements[0].Temp;
+                LastTemp = AllMeasurements[0].TempDS;
                 LastPress = AllMeasurements[0].Press;
                 LastTime = AllMeasurements[0].Time.ToString();
                 LastHum = AllMeasurements[0].Hum;

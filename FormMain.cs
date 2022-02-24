@@ -16,11 +16,11 @@ namespace WeatherStationDesktop
 {
     public partial class FormMain : Form
     {
-        Measurements measurements;
+
         OneDayWeather currentWeather;
         CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
-        List<RadioButton> LastRange = new List<RadioButton>();
-        List<OneDayWeather> ForecastWeaders = new List<OneDayWeather>();
+        List<OneDayWeather> ForecastWeadersDaily = new List<OneDayWeather>();
+        List<OneDayWeather> ForecastWeadersHurly = new List<OneDayWeather>();
         int? iconNumber;
         int openWeatherMapConnecionStatus;
 
@@ -29,14 +29,13 @@ namespace WeatherStationDesktop
         {
             InitializeComponent();
 
-            measurements = new Measurements();
+           Measurements measurements = new Measurements();
             if (measurements.ConnectionStatus)
             {
                 textBox_LastMesPress.Text = $"Pressure: {(measurements.LastPress/100).ToString()} hPa";
                 textBox_LastMesTemp.Text = measurements.LastTemp.ToString()+"\u00b0 C";
                 textBox_LastMesTime.Text = measurements.LastTime.ToString();
                 textBoxLastMesHum.Text = $"Humidity: {measurements.LastHum.ToString()}%";
-                UpdateCharts();
             }
             else
             {
@@ -51,11 +50,10 @@ namespace WeatherStationDesktop
 
         async Task UpdateWeatherForecast()
         {
-            OpenWeatherMapHistorical openWeatherMapHistorical = new OpenWeatherMapHistorical();
-            await openWeatherMapHistorical.GenerateWeatherObject();
             OpenWeatherMapForecast openWeatherMapForecast = new OpenWeatherMapForecast();
             await openWeatherMapForecast.GenerateWeatherObject();
-            ForecastWeaders = openWeatherMapForecast.GetDailyWeather();
+            ForecastWeadersDaily = openWeatherMapForecast.GetDailyWeather();
+            ForecastWeadersHurly = openWeatherMapForecast.GetHourlyWeather();
             openWeatherMapConnecionStatus = openWeatherMapForecast.httpStatusCode;
             if (openWeatherMapForecast.httpStatusCode != 200)
             {
@@ -63,7 +61,7 @@ namespace WeatherStationDesktop
                 return;
             } 
 
-            currentWeather = ForecastWeaders[0];
+            currentWeather = ForecastWeadersDaily[0];
             textBoxWeatherTime.Text = currentWeather.DateTime.ToString("dddd, MMMM dd yyyy", culture);
             textBoxWeatherDesc.Text = currentWeather.Description;
             textBoxWeatherTemp.Text = $"Temperature: {currentWeather.Temp}\u00b0 C";
@@ -82,113 +80,74 @@ namespace WeatherStationDesktop
                 TextBox textBoxMain = (TextBox)controls[0];
                 controls = this.Controls.Find($"textBoxForecast{i}details", true);
                 TextBox textBoxDetails = (TextBox)controls[0];
-                pictureBox.Image = imageListIcons.Images[(int)GetImageCode(ForecastWeaders[i].Icon)];
-                textBoxMain.Text = ForecastWeaders[i].DateTime.ToString("dddd", culture);
-                textBoxMain.Text += $": {ForecastWeaders[i].Main}";
-                textBoxDetails.AppendText($"T: {ForecastWeaders[i].Temp.ToString()}\u00b0 C");
+                pictureBox.Image = imageListIcons.Images[(int)GetImageCode(ForecastWeadersDaily[i].Icon)];
+                textBoxMain.Text = ForecastWeadersDaily[i].DateTime.ToString("dddd", culture);
+                textBoxMain.Text += $": {ForecastWeadersDaily[i].Main}";
+                textBoxDetails.AppendText($"T: {ForecastWeadersDaily[i].Temp.ToString()}\u00b0 C");
                 textBoxDetails.AppendText(Environment.NewLine);
-                textBoxDetails.AppendText($"W: {Math.Round(ForecastWeaders[i].WindSpeed).ToString()} km/h");
+                textBoxDetails.AppendText($"W: {Math.Round(ForecastWeadersDaily[i].WindSpeed).ToString()} km/h");
                 textBoxDetails.AppendText(Environment.NewLine);
-                textBoxDetails.AppendText($"R: {ForecastWeaders[i].Rain} mm");
+                textBoxDetails.AppendText($"R: {ForecastWeadersDaily[i].Rain} mm");
                 textBoxDetails.AppendText(Environment.NewLine);
-                textBoxDetails.AppendText($"S: {ForecastWeaders[i].Snow} mm");
+                textBoxDetails.AppendText($"S: {ForecastWeadersDaily[i].Snow} mm");
             }
+
+            List<double> Temperature = ForecastWeadersHurly.Select(E=>E.Temp).ToList();
+            List<double> TemperatureFeels = ForecastWeadersHurly.Select(E => E.Feels_like).ToList();
+            List<int> Pressure = ForecastWeadersHurly.Select(E => E.Pressure).ToList();
+            List<double> Rain = ForecastWeadersHurly.Select(X => X.Rain).ToList();
+            List<double> Snow = ForecastWeadersHurly.Select(X => X.Snow).ToList();
+            List<string> Labels = ForecastWeadersHurly.Select(E => E.DateTime.ToString("t")).ToList();
+
+            SeriesCollection TempSeries = new SeriesCollection();
+            SeriesCollection PrecipationSeries = new SeriesCollection();
+
+            LineSeries TempSet = new LineSeries() { Title = "Temperature", Values = new ChartValues<double>(Temperature) };
+            LineSeries TempFeelsSet = new LineSeries() { Title = "Temperature Feels", Values = new ChartValues<double>(TemperatureFeels) };
+            LineSeries PressSet = new LineSeries() { Title = "Humidity", Values = new ChartValues<int>(Pressure) };
+            ColumnSeries RainSet = new ColumnSeries() { Title = "Rain", Values = new ChartValues<double>(Rain), };
+            ColumnSeries SnowSet = new ColumnSeries() { Title = "Snow", Values = new ChartValues<double>(Snow), };
+
+            TempSet.Stroke = System.Windows.Media.Brushes.Red;
+            TempFeelsSet.Stroke = System.Windows.Media.Brushes.Pink;
+            PressSet.Stroke = System.Windows.Media.Brushes.Orange;
+            RainSet.Stroke = System.Windows.Media.Brushes.Blue;
+            SnowSet.Stroke = System.Windows.Media.Brushes.White;
+
+            TempSeries.Add(TempSet);
+            TempSeries.Add(TempFeelsSet);
+            PrecipationSeries.Add(RainSet);
+            PrecipationSeries.Add(SnowSet);
+
+            Axis ayPress = new Axis() { Separator = new Separator() { Step = 20 }};
+            Axis axTem = new Axis() { Separator = new Separator() { Step = 4 }, Position = AxisPosition.RightTop, Labels = Labels };
+            Axis axPress = new Axis() { Separator = new Separator() { Step = 4 }, Labels = Labels };
+            Axis axPrec= new Axis() { Separator = new Separator() { Step = 4 }, Labels = Labels };
+
+            
+            cartesianChartTemperature.Series = TempSeries;
+            cartesianChartPressure.Series.Add(PressSet);
+            cartesianChartRain.Series=PrecipationSeries;
+
+            cartesianChartTemperature.AxisX.Clear();
+            cartesianChartPressure.AxisX.Clear();
+            cartesianChartRain.AxisX.Clear();
+            cartesianChartPressure.AxisY.Clear();
+
+            cartesianChartPressure.AxisY.Add(ayPress);
+            cartesianChartPressure.AxisX.Add(axPress);
+            cartesianChartTemperature.AxisX.Add(axTem);
+            cartesianChartRain.AxisX.Add(axPrec);
+
         }
 
-        bool UpdateCharts()
-        {
-            Cursor.Current = Cursors.WaitCursor;
-            int rangeCode;
-            if (radioButtonToday.Checked == true)
-            {
-                rangeCode = 1;
-            }else if (radioButton3Days.Checked == true)
-            {
-                rangeCode = 3;
-            }
-            else
-            {
-                rangeCode = 7;
-            }
-
-            ChartsDatas chartsDatas = measurements.GetChartsDatas(rangeCode);
-            if (measurements.ConnectionStatus)
-            {
-                cartesianChartPressure.Series.Clear();
-                cartesianChartPressure.AxisX.Clear();
-                cartesianChartPressure.AxisY.Clear();
-                cartesianChartTemperature.Series.Clear();
-                cartesianChartTemperature.AxisX.Clear();
-                cartesianChartHumidity.Series.Clear();
-                cartesianChartHumidity.AxisX.Clear();
-
-                SeriesCollection PressSeries = new SeriesCollection();
-                LineSeries PressSet = new LineSeries() { Title = "Pressure", Values = new ChartValues<double>(chartsDatas.Pressure), };
-                PressSet.Stroke = System.Windows.Media.Brushes.Orange;
-                PressSeries.Add(PressSet);
-                cartesianChartPressure.Series = PressSeries;
-
-                SeriesCollection HumSeries = new SeriesCollection();
-                LineSeries HumSet = new LineSeries() { Title = "Humidity", Values = new ChartValues<double>(chartsDatas.Humidity), };
-                HumSeries.Add(HumSet);
-                cartesianChartHumidity.Series = HumSeries;
-
-                SeriesCollection TempSeries = new SeriesCollection();
-                LineSeries TempSet = new LineSeries() { Title = "Temperature", Values = new ChartValues<double>(chartsDatas.Temperature) };
-                TempSet.Stroke = System.Windows.Media.Brushes.Red;
-                TempSeries.Add(TempSet);
-                cartesianChartTemperature.Series = TempSeries;
-                Axis axPress = new Axis() { Separator = new Separator() { Step = 24 } };
-                axPress.Labels = chartsDatas.TimesLabels;
-                Axis axTem = new Axis() { Separator = new Separator() { Step = 12 } };
-                axTem.Labels = chartsDatas.TimesLabels;
-                Axis axHum = new Axis() { Separator = new Separator() { Step = 24 } };
-                axHum.Labels = chartsDatas.TimesLabels;
-
-                cartesianChartPressure.AxisX.Add(axPress);
-                //cartesianChartPressure.AxisY.Add(ayPress);
-                cartesianChartTemperature.AxisX.Add(axTem);
-                cartesianChartHumidity.AxisX.Add(axHum);
-                AddLastRange();
-                Cursor.Current = Cursors.Default;
-
-                return true;
-            }
-            else
-            {
-                MessageBox.Show("Update failed!", "Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
-                Cursor.Current = Cursors.Default;
-                restoreLastRange();
-                return false;
-            }
 
 
-        
-        }
 
-        void AddLastRange()
-        {
-            if (radioButtonToday.Checked)
-            {
-                LastRange.Add(radioButtonToday);
-            }
-            else if (radioButton3Days.Checked)
-            {
-                LastRange.Add(radioButton3Days);
-            }
-            else
-            {
-                LastRange.Add(radioButtonWeek);
-            }
-        }
 
-        void restoreLastRange()
-        {
-            RadioButton button = LastRange.Last();
-            button.Checked = true;
-        }
 
-        
+
+
         private int? GetImageCode(string iconeCode)
         {
             Dictionary<string, int> Icons = new Dictionary<string, int>();
@@ -209,20 +168,6 @@ namespace WeatherStationDesktop
 
         }
 
-        private void radioButtonToday_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radioButtonToday.Checked & LastRange.Last() != radioButtonToday) UpdateCharts();
-        }
-
-        private void radioButton3Days_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radioButton3Days.Checked & LastRange.Last() != radioButton3Days) UpdateCharts();
-        }
-
-        private void radioButtonWeek_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radioButtonWeek.Checked & LastRange.Last() != radioButtonWeek) UpdateCharts();
-        }
         private void buttonWeatherDetails_Click(object sender, EventArgs e)
         {
             FormCurrentWeather currentWeatherForm = new FormCurrentWeather(currentWeather, (int)iconNumber);
@@ -233,7 +178,7 @@ namespace WeatherStationDesktop
         {
             if (openWeatherMapConnecionStatus == 200)
             {
-                FormCurrentWeather currentWeatherForm = new FormCurrentWeather(ForecastWeaders[1], (int)GetImageCode(ForecastWeaders[1].Icon));
+                FormCurrentWeather currentWeatherForm = new FormCurrentWeather(ForecastWeadersDaily[1], (int)GetImageCode(ForecastWeadersDaily[1].Icon));
                 currentWeatherForm.Show();
             }
 
@@ -243,7 +188,7 @@ namespace WeatherStationDesktop
         {
             if (openWeatherMapConnecionStatus == 200)
             {
-                FormCurrentWeather currentWeatherForm = new FormCurrentWeather(ForecastWeaders[2], (int)GetImageCode(ForecastWeaders[2].Icon));
+                FormCurrentWeather currentWeatherForm = new FormCurrentWeather(ForecastWeadersDaily[2], (int)GetImageCode(ForecastWeadersDaily[2].Icon));
                 currentWeatherForm.Show();
             }
         }
@@ -252,7 +197,7 @@ namespace WeatherStationDesktop
         {
             if (openWeatherMapConnecionStatus == 200)
             {
-                FormCurrentWeather currentWeatherForm = new FormCurrentWeather(ForecastWeaders[3], (int)GetImageCode(ForecastWeaders[3].Icon));
+                FormCurrentWeather currentWeatherForm = new FormCurrentWeather(ForecastWeadersDaily[3], (int)GetImageCode(ForecastWeadersDaily[3].Icon));
                 currentWeatherForm.Show();
             }
         }
@@ -261,7 +206,7 @@ namespace WeatherStationDesktop
         {
             if (openWeatherMapConnecionStatus == 200)
             {
-                FormCurrentWeather currentWeatherForm = new FormCurrentWeather(ForecastWeaders[4], (int)GetImageCode(ForecastWeaders[4].Icon));
+                FormCurrentWeather currentWeatherForm = new FormCurrentWeather(ForecastWeadersDaily[4], (int)GetImageCode(ForecastWeadersDaily[4].Icon));
                 currentWeatherForm.Show();
             }
         }
@@ -270,7 +215,7 @@ namespace WeatherStationDesktop
         {
             if (openWeatherMapConnecionStatus == 200)
             {
-                FormCurrentWeather currentWeatherForm = new FormCurrentWeather(ForecastWeaders[5], (int)GetImageCode(ForecastWeaders[5].Icon));
+                FormCurrentWeather currentWeatherForm = new FormCurrentWeather(ForecastWeadersDaily[5], (int)GetImageCode(ForecastWeadersDaily[5].Icon));
                 currentWeatherForm.Show();
             }
         }
@@ -279,7 +224,7 @@ namespace WeatherStationDesktop
         {
             if (openWeatherMapConnecionStatus == 200)
             {
-                FormCurrentWeather currentWeatherForm = new FormCurrentWeather(ForecastWeaders[6], (int)GetImageCode(ForecastWeaders[6].Icon));
+                FormCurrentWeather currentWeatherForm = new FormCurrentWeather(ForecastWeadersDaily[6], (int)GetImageCode(ForecastWeadersDaily[6].Icon));
                 currentWeatherForm.Show();
             }
         }
@@ -288,7 +233,7 @@ namespace WeatherStationDesktop
         {
             if (openWeatherMapConnecionStatus == 200)
             {
-                FormCurrentWeather currentWeatherForm = new FormCurrentWeather(ForecastWeaders[7], (int)GetImageCode(ForecastWeaders[7].Icon));
+                FormCurrentWeather currentWeatherForm = new FormCurrentWeather(ForecastWeadersDaily[7], (int)GetImageCode(ForecastWeadersDaily[7].Icon));
                 currentWeatherForm.Show();
             }
         }
@@ -298,5 +243,12 @@ namespace WeatherStationDesktop
             FormHistoricalWeater formHistoricalWeater = new FormHistoricalWeater();
             formHistoricalWeater.Show();
         }
+
+        private void button_IndorMeasDetails_Click(object sender, EventArgs e)
+        {
+            FormIndorMeasurements formIndorMeasurements = new FormIndorMeasurements();
+            formIndorMeasurements.Show();
+        }
+
     }
 }

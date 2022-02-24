@@ -116,6 +116,12 @@
     <Compile Include="FormHistoricalWeater.Designer.cs">
       <DependentUpon>FormHistoricalWeater.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormIndorMeasurements.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormIndorMeasurements.Designer.cs">
+      <DependentUpon>FormIndorMeasurements.cs</DependentUpon>
+    </Compile>
     <Compile Include="OneDayWeather.cs" />
     <Compile Include="DBConnection.cs" />
     <Compile Include="FormCurrentWeather.cs">
@@ -139,6 +145,9 @@
     <Compile Include="UnixTimestampConverter.cs" />
     <EmbeddedResource Include="FormCurrentWeather.resx">
       <DependentUpon>FormCurrentWeather.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormIndorMeasurements.resx">
+      <DependentUpon>FormIndorMeasurements.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>

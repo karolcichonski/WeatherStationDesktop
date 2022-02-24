@@ -45,5 +45,10 @@ namespace WeatherStationDesctop
         {
             return DailyWeather;
         }
+
+        public List<OneDayWeather> GetHourlyWeather()
+        {
+            return HourlyWeather;
+        }
     }
 }

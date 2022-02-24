@@ -91,6 +91,15 @@ namespace WeatherStationDesctop
             CloudAll = oneDayWeather.clouds;
             DateTime = UnixTimestampConverter.GetCurrentDatetime(oneDayWeather.dt);
             Timozene = timezone;
+            if (oneDayWeather.Snow != null)
+            {
+                Snow = oneDayWeather.Snow.hour;
+            }
+
+            if (oneDayWeather.Rain != null)
+            {
+                Rain = oneDayWeather.Rain.hour;
+            }
         }
 
         public double Lon { get; private set; }

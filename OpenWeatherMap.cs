@@ -147,6 +147,8 @@ namespace WeatherStationDesctop
             public int visibility { get; set; }
             public double pop { get; set; }
             public double uvi { get; set; }
+            public Rain Rain { get; set; }
+            public Snow Snow { get; set; }
 
         }
         public OneCallWeatherHourly[] hourly { get; set; }
@@ -200,6 +202,18 @@ namespace WeatherStationDesctop
         public string main { get; set; }
         public string description { get; set; }
         public string icon { get; set; }
+    }
+
+    public class Rain
+    {
+        [JsonProperty(PropertyName = "1h")]
+        public double hour { get; set; }
+    }
+
+    public class Snow
+    {
+        [JsonProperty(PropertyName = "1h")]
+        public double hour { get; set; }
     }
 
 }
