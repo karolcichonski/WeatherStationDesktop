@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WeatherStationDesktop;
 
-namespace WeatherStationDesctop
+namespace WeatherStation
 {
     class OpenWeatherMapHistorical : OpenWeatherMap
     {
@@ -17,14 +17,16 @@ namespace WeatherStationDesctop
 
         async override public Task GenerateWeatherObject()
         {
+            longitude = Properties.Settings.Default.longitude;
+            latitude = Properties.Settings.Default.latitude;
             HourlyWeather = new List<OneDayWeather>();
 
             for (int i=5; i>0; i--)
             {
                 daysAgo = UnixTimestampConverter.GetNDaysAgo(i);
-                httpRequest = $"https://api.openweathermap.org/data/2.5/onecall/timemachine?lat=50.2976&lon=18.6766&dt={daysAgo}&units=metric&appid={DBConnection.GetOpenWetherMapAPIKey()}";
+                httpRequest = $"https://api.openweathermap.org/data/2.5/onecall/timemachine?lat={latitude}&lon={longitude}&dt={daysAgo}&units=metric&appid={DBConnection.GetOpenWetherMapAPIKey()}";
                 await GettWeatherData(httpRequest);
-                if (httpStatusCode == 200 & json != null)
+                if (HttpStatusCode == 200 & json != null)
                 {
                     OneCallWeather = JsonConvert.DeserializeObject<OneCallWeather>(json);
                     foreach (OneCallWeather.OneCallWeatherHourly weatherHourly in OneCallWeather.hourly)

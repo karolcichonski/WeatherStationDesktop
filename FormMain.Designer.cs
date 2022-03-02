@@ -33,7 +33,6 @@
             this.groupBoxCurrentWeather = new System.Windows.Forms.GroupBox();
             this.buttonHist = new System.Windows.Forms.Button();
             this.buttonWeatherDetails = new System.Windows.Forms.Button();
-            this.pictureBoxCurrentWeather = new System.Windows.Forms.PictureBox();
             this.textBoxWeatherWind = new System.Windows.Forms.TextBox();
             this.textBoxWeatherPress = new System.Windows.Forms.TextBox();
             this.textBoxWeatherHum = new System.Windows.Forms.TextBox();
@@ -42,6 +41,11 @@
             this.textBoxWeatherTime = new System.Windows.Forms.TextBox();
             this.imageListIcons = new System.Windows.Forms.ImageList(this.components);
             this.groupBoxIndor = new System.Windows.Forms.GroupBox();
+            this.button_IndorMeasDetails = new System.Windows.Forms.Button();
+            this.textBoxLastMesHum = new System.Windows.Forms.TextBox();
+            this.textBox_LastMesTime = new System.Windows.Forms.TextBox();
+            this.textBox_LastMesPress = new System.Windows.Forms.TextBox();
+            this.textBox_LastMesTemp = new System.Windows.Forms.TextBox();
             this.groupBoxForecast = new System.Windows.Forms.GroupBox();
             this.textBoxForecast7details = new System.Windows.Forms.TextBox();
             this.textBoxForecast6details = new System.Windows.Forms.TextBox();
@@ -57,6 +61,11 @@
             this.textBoxForecast3main = new System.Windows.Forms.TextBox();
             this.textBoxForecast2main = new System.Windows.Forms.TextBox();
             this.textBoxForecast1main = new System.Windows.Forms.TextBox();
+            this.groupBoxForecastWeatherHourly = new System.Windows.Forms.GroupBox();
+            this.cartesianChartRain = new LiveCharts.WinForms.CartesianChart();
+            this.cartesianChartPressure = new LiveCharts.WinForms.CartesianChart();
+            this.cartesianChartTemperature = new LiveCharts.WinForms.CartesianChart();
+            this.buttonSettings = new System.Windows.Forms.Button();
             this.pictureBoxForecast7 = new System.Windows.Forms.PictureBox();
             this.pictureBoxForecast6 = new System.Windows.Forms.PictureBox();
             this.pictureBoxForecast5 = new System.Windows.Forms.PictureBox();
@@ -64,19 +73,11 @@
             this.pictureBoxForecast3 = new System.Windows.Forms.PictureBox();
             this.pictureBoxForecast2 = new System.Windows.Forms.PictureBox();
             this.pictureBoxForecast1 = new System.Windows.Forms.PictureBox();
-            this.groupBoxForecastWeatherHourly = new System.Windows.Forms.GroupBox();
-            this.cartesianChartRain = new LiveCharts.WinForms.CartesianChart();
-            this.cartesianChartPressure = new LiveCharts.WinForms.CartesianChart();
-            this.cartesianChartTemperature = new LiveCharts.WinForms.CartesianChart();
-            this.button_IndorMeasDetails = new System.Windows.Forms.Button();
-            this.textBoxLastMesHum = new System.Windows.Forms.TextBox();
-            this.textBox_LastMesTime = new System.Windows.Forms.TextBox();
-            this.textBox_LastMesPress = new System.Windows.Forms.TextBox();
-            this.textBox_LastMesTemp = new System.Windows.Forms.TextBox();
+            this.pictureBoxCurrentWeather = new System.Windows.Forms.PictureBox();
             this.groupBoxCurrentWeather.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCurrentWeather)).BeginInit();
             this.groupBoxIndor.SuspendLayout();
             this.groupBoxForecast.SuspendLayout();
+            this.groupBoxForecastWeatherHourly.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxForecast7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxForecast6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxForecast5)).BeginInit();
@@ -84,7 +85,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxForecast3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxForecast2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxForecast1)).BeginInit();
-            this.groupBoxForecastWeatherHourly.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCurrentWeather)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBoxCurrentWeather
@@ -133,14 +134,6 @@
             this.buttonWeatherDetails.Text = "Details";
             this.buttonWeatherDetails.UseVisualStyleBackColor = false;
             this.buttonWeatherDetails.Click += new System.EventHandler(this.buttonWeatherDetails_Click);
-            // 
-            // pictureBoxCurrentWeather
-            // 
-            this.pictureBoxCurrentWeather.Location = new System.Drawing.Point(24, 19);
-            this.pictureBoxCurrentWeather.Name = "pictureBoxCurrentWeather";
-            this.pictureBoxCurrentWeather.Size = new System.Drawing.Size(50, 60);
-            this.pictureBoxCurrentWeather.TabIndex = 21;
-            this.pictureBoxCurrentWeather.TabStop = false;
             // 
             // textBoxWeatherWind
             // 
@@ -260,10 +253,80 @@
             this.groupBoxIndor.ForeColor = System.Drawing.Color.White;
             this.groupBoxIndor.Location = new System.Drawing.Point(45, 729);
             this.groupBoxIndor.Name = "groupBoxIndor";
-            this.groupBoxIndor.Size = new System.Drawing.Size(1043, 76);
+            this.groupBoxIndor.Size = new System.Drawing.Size(931, 76);
             this.groupBoxIndor.TabIndex = 16;
             this.groupBoxIndor.TabStop = false;
             this.groupBoxIndor.Text = "Indor Measurements";
+            // 
+            // button_IndorMeasDetails
+            // 
+            this.button_IndorMeasDetails.BackColor = System.Drawing.Color.Gray;
+            this.button_IndorMeasDetails.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button_IndorMeasDetails.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_IndorMeasDetails.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.button_IndorMeasDetails.Location = new System.Drawing.Point(704, 33);
+            this.button_IndorMeasDetails.Name = "button_IndorMeasDetails";
+            this.button_IndorMeasDetails.Size = new System.Drawing.Size(75, 23);
+            this.button_IndorMeasDetails.TabIndex = 28;
+            this.button_IndorMeasDetails.Text = "Details";
+            this.button_IndorMeasDetails.UseVisualStyleBackColor = false;
+            this.button_IndorMeasDetails.Click += new System.EventHandler(this.button_IndorMeasDetails_Click);
+            // 
+            // textBoxLastMesHum
+            // 
+            this.textBoxLastMesHum.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.textBoxLastMesHum.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxLastMesHum.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBoxLastMesHum.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.textBoxLastMesHum.ForeColor = System.Drawing.Color.White;
+            this.textBoxLastMesHum.Location = new System.Drawing.Point(320, 32);
+            this.textBoxLastMesHum.Name = "textBoxLastMesHum";
+            this.textBoxLastMesHum.ReadOnly = true;
+            this.textBoxLastMesHum.Size = new System.Drawing.Size(156, 24);
+            this.textBoxLastMesHum.TabIndex = 27;
+            this.textBoxLastMesHum.TabStop = false;
+            // 
+            // textBox_LastMesTime
+            // 
+            this.textBox_LastMesTime.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.textBox_LastMesTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox_LastMesTime.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox_LastMesTime.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.textBox_LastMesTime.ForeColor = System.Drawing.Color.White;
+            this.textBox_LastMesTime.Location = new System.Drawing.Point(41, 32);
+            this.textBox_LastMesTime.Name = "textBox_LastMesTime";
+            this.textBox_LastMesTime.ReadOnly = true;
+            this.textBox_LastMesTime.Size = new System.Drawing.Size(157, 24);
+            this.textBox_LastMesTime.TabIndex = 26;
+            this.textBox_LastMesTime.TabStop = false;
+            // 
+            // textBox_LastMesPress
+            // 
+            this.textBox_LastMesPress.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.textBox_LastMesPress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox_LastMesPress.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox_LastMesPress.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.textBox_LastMesPress.ForeColor = System.Drawing.Color.White;
+            this.textBox_LastMesPress.Location = new System.Drawing.Point(482, 32);
+            this.textBox_LastMesPress.Name = "textBox_LastMesPress";
+            this.textBox_LastMesPress.ReadOnly = true;
+            this.textBox_LastMesPress.Size = new System.Drawing.Size(175, 24);
+            this.textBox_LastMesPress.TabIndex = 25;
+            this.textBox_LastMesPress.TabStop = false;
+            // 
+            // textBox_LastMesTemp
+            // 
+            this.textBox_LastMesTemp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.textBox_LastMesTemp.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox_LastMesTemp.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox_LastMesTemp.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.textBox_LastMesTemp.ForeColor = System.Drawing.Color.White;
+            this.textBox_LastMesTemp.Location = new System.Drawing.Point(204, 32);
+            this.textBox_LastMesTemp.Name = "textBox_LastMesTemp";
+            this.textBox_LastMesTemp.ReadOnly = true;
+            this.textBox_LastMesTemp.Size = new System.Drawing.Size(110, 24);
+            this.textBox_LastMesTemp.TabIndex = 24;
+            this.textBox_LastMesTemp.TabStop = false;
             // 
             // groupBoxForecast
             // 
@@ -499,6 +562,56 @@
             this.textBoxForecast1main.TabIndex = 29;
             this.textBoxForecast1main.TabStop = false;
             // 
+            // groupBoxForecastWeatherHourly
+            // 
+            this.groupBoxForecastWeatherHourly.Controls.Add(this.cartesianChartRain);
+            this.groupBoxForecastWeatherHourly.Controls.Add(this.cartesianChartPressure);
+            this.groupBoxForecastWeatherHourly.Controls.Add(this.cartesianChartTemperature);
+            this.groupBoxForecastWeatherHourly.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.groupBoxForecastWeatherHourly.ForeColor = System.Drawing.Color.White;
+            this.groupBoxForecastWeatherHourly.Location = new System.Drawing.Point(45, 282);
+            this.groupBoxForecastWeatherHourly.Name = "groupBoxForecastWeatherHourly";
+            this.groupBoxForecastWeatherHourly.Size = new System.Drawing.Size(1043, 441);
+            this.groupBoxForecastWeatherHourly.TabIndex = 18;
+            this.groupBoxForecastWeatherHourly.TabStop = false;
+            this.groupBoxForecastWeatherHourly.Text = "48H forecast";
+            // 
+            // cartesianChartRain
+            // 
+            this.cartesianChartRain.Location = new System.Drawing.Point(35, 309);
+            this.cartesianChartRain.Name = "cartesianChartRain";
+            this.cartesianChartRain.Size = new System.Drawing.Size(946, 80);
+            this.cartesianChartRain.TabIndex = 48;
+            this.cartesianChartRain.Text = "cartesianChart1";
+            // 
+            // cartesianChartPressure
+            // 
+            this.cartesianChartPressure.Location = new System.Drawing.Point(30, 169);
+            this.cartesianChartPressure.Name = "cartesianChartPressure";
+            this.cartesianChartPressure.Size = new System.Drawing.Size(951, 134);
+            this.cartesianChartPressure.TabIndex = 47;
+            this.cartesianChartPressure.Text = "cartesianChart1";
+            // 
+            // cartesianChartTemperature
+            // 
+            this.cartesianChartTemperature.Location = new System.Drawing.Point(41, 29);
+            this.cartesianChartTemperature.Name = "cartesianChartTemperature";
+            this.cartesianChartTemperature.Size = new System.Drawing.Size(940, 134);
+            this.cartesianChartTemperature.TabIndex = 46;
+            this.cartesianChartTemperature.Text = "cartesianChart1";
+            // 
+            // buttonSettings
+            // 
+            this.buttonSettings.FlatAppearance.BorderSize = 0;
+            this.buttonSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSettings.Image = global::WeatherStation.Properties.Resources.Settings_4_icon__1_;
+            this.buttonSettings.Location = new System.Drawing.Point(991, 735);
+            this.buttonSettings.Name = "buttonSettings";
+            this.buttonSettings.Size = new System.Drawing.Size(97, 76);
+            this.buttonSettings.TabIndex = 19;
+            this.buttonSettings.UseVisualStyleBackColor = true;
+            this.buttonSettings.Click += new System.EventHandler(this.buttonSettings_Click);
+            // 
             // pictureBoxForecast7
             // 
             this.pictureBoxForecast7.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -569,112 +682,13 @@
             this.pictureBoxForecast1.TabStop = false;
             this.pictureBoxForecast1.Click += new System.EventHandler(this.pictureBoxForecast1_Click);
             // 
-            // groupBoxForecastWeatherHourly
+            // pictureBoxCurrentWeather
             // 
-            this.groupBoxForecastWeatherHourly.Controls.Add(this.cartesianChartRain);
-            this.groupBoxForecastWeatherHourly.Controls.Add(this.cartesianChartPressure);
-            this.groupBoxForecastWeatherHourly.Controls.Add(this.cartesianChartTemperature);
-            this.groupBoxForecastWeatherHourly.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.groupBoxForecastWeatherHourly.ForeColor = System.Drawing.Color.White;
-            this.groupBoxForecastWeatherHourly.Location = new System.Drawing.Point(45, 282);
-            this.groupBoxForecastWeatherHourly.Name = "groupBoxForecastWeatherHourly";
-            this.groupBoxForecastWeatherHourly.Size = new System.Drawing.Size(1043, 441);
-            this.groupBoxForecastWeatherHourly.TabIndex = 18;
-            this.groupBoxForecastWeatherHourly.TabStop = false;
-            this.groupBoxForecastWeatherHourly.Text = "48H forecast";
-            // 
-            // cartesianChartRain
-            // 
-            this.cartesianChartRain.Location = new System.Drawing.Point(35, 309);
-            this.cartesianChartRain.Name = "cartesianChartRain";
-            this.cartesianChartRain.Size = new System.Drawing.Size(946, 80);
-            this.cartesianChartRain.TabIndex = 48;
-            this.cartesianChartRain.Text = "cartesianChart1";
-            // 
-            // cartesianChartPressure
-            // 
-            this.cartesianChartPressure.Location = new System.Drawing.Point(30, 169);
-            this.cartesianChartPressure.Name = "cartesianChartPressure";
-            this.cartesianChartPressure.Size = new System.Drawing.Size(951, 134);
-            this.cartesianChartPressure.TabIndex = 47;
-            this.cartesianChartPressure.Text = "cartesianChart1";
-            // 
-            // cartesianChartTemperature
-            // 
-            this.cartesianChartTemperature.Location = new System.Drawing.Point(41, 29);
-            this.cartesianChartTemperature.Name = "cartesianChartTemperature";
-            this.cartesianChartTemperature.Size = new System.Drawing.Size(940, 134);
-            this.cartesianChartTemperature.TabIndex = 46;
-            this.cartesianChartTemperature.Text = "cartesianChart1";
-            // 
-            // button_IndorMeasDetails
-            // 
-            this.button_IndorMeasDetails.BackColor = System.Drawing.Color.Gray;
-            this.button_IndorMeasDetails.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button_IndorMeasDetails.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_IndorMeasDetails.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button_IndorMeasDetails.Location = new System.Drawing.Point(900, 31);
-            this.button_IndorMeasDetails.Name = "button_IndorMeasDetails";
-            this.button_IndorMeasDetails.Size = new System.Drawing.Size(75, 23);
-            this.button_IndorMeasDetails.TabIndex = 28;
-            this.button_IndorMeasDetails.Text = "Details";
-            this.button_IndorMeasDetails.UseVisualStyleBackColor = false;
-            // 
-            // textBoxLastMesHum
-            // 
-            this.textBoxLastMesHum.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.textBoxLastMesHum.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBoxLastMesHum.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBoxLastMesHum.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.textBoxLastMesHum.ForeColor = System.Drawing.Color.White;
-            this.textBoxLastMesHum.Location = new System.Drawing.Point(320, 32);
-            this.textBoxLastMesHum.Name = "textBoxLastMesHum";
-            this.textBoxLastMesHum.ReadOnly = true;
-            this.textBoxLastMesHum.Size = new System.Drawing.Size(156, 24);
-            this.textBoxLastMesHum.TabIndex = 27;
-            this.textBoxLastMesHum.TabStop = false;
-            // 
-            // textBox_LastMesTime
-            // 
-            this.textBox_LastMesTime.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.textBox_LastMesTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox_LastMesTime.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox_LastMesTime.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.textBox_LastMesTime.ForeColor = System.Drawing.Color.White;
-            this.textBox_LastMesTime.Location = new System.Drawing.Point(41, 32);
-            this.textBox_LastMesTime.Name = "textBox_LastMesTime";
-            this.textBox_LastMesTime.ReadOnly = true;
-            this.textBox_LastMesTime.Size = new System.Drawing.Size(157, 24);
-            this.textBox_LastMesTime.TabIndex = 26;
-            this.textBox_LastMesTime.TabStop = false;
-            // 
-            // textBox_LastMesPress
-            // 
-            this.textBox_LastMesPress.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.textBox_LastMesPress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox_LastMesPress.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox_LastMesPress.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.textBox_LastMesPress.ForeColor = System.Drawing.Color.White;
-            this.textBox_LastMesPress.Location = new System.Drawing.Point(482, 32);
-            this.textBox_LastMesPress.Name = "textBox_LastMesPress";
-            this.textBox_LastMesPress.ReadOnly = true;
-            this.textBox_LastMesPress.Size = new System.Drawing.Size(175, 24);
-            this.textBox_LastMesPress.TabIndex = 25;
-            this.textBox_LastMesPress.TabStop = false;
-            // 
-            // textBox_LastMesTemp
-            // 
-            this.textBox_LastMesTemp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.textBox_LastMesTemp.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox_LastMesTemp.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox_LastMesTemp.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.textBox_LastMesTemp.ForeColor = System.Drawing.Color.White;
-            this.textBox_LastMesTemp.Location = new System.Drawing.Point(204, 32);
-            this.textBox_LastMesTemp.Name = "textBox_LastMesTemp";
-            this.textBox_LastMesTemp.ReadOnly = true;
-            this.textBox_LastMesTemp.Size = new System.Drawing.Size(110, 24);
-            this.textBox_LastMesTemp.TabIndex = 24;
-            this.textBox_LastMesTemp.TabStop = false;
+            this.pictureBoxCurrentWeather.Location = new System.Drawing.Point(24, 19);
+            this.pictureBoxCurrentWeather.Name = "pictureBoxCurrentWeather";
+            this.pictureBoxCurrentWeather.Size = new System.Drawing.Size(50, 60);
+            this.pictureBoxCurrentWeather.TabIndex = 21;
+            this.pictureBoxCurrentWeather.TabStop = false;
             // 
             // FormMain
             // 
@@ -682,6 +696,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(1131, 858);
+            this.Controls.Add(this.buttonSettings);
             this.Controls.Add(this.groupBoxForecastWeatherHourly);
             this.Controls.Add(this.groupBoxForecast);
             this.Controls.Add(this.groupBoxIndor);
@@ -693,11 +708,11 @@
             this.Text = "Weather Station";
             this.groupBoxCurrentWeather.ResumeLayout(false);
             this.groupBoxCurrentWeather.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCurrentWeather)).EndInit();
             this.groupBoxIndor.ResumeLayout(false);
             this.groupBoxIndor.PerformLayout();
             this.groupBoxForecast.ResumeLayout(false);
             this.groupBoxForecast.PerformLayout();
+            this.groupBoxForecastWeatherHourly.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxForecast7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxForecast6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxForecast5)).EndInit();
@@ -705,7 +720,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxForecast3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxForecast2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxForecast1)).EndInit();
-            this.groupBoxForecastWeatherHourly.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCurrentWeather)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -754,6 +769,7 @@
         private System.Windows.Forms.TextBox textBox_LastMesTime;
         private System.Windows.Forms.TextBox textBox_LastMesPress;
         private System.Windows.Forms.TextBox textBox_LastMesTemp;
+        private System.Windows.Forms.Button buttonSettings;
     }
 }
 

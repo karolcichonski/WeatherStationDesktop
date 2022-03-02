@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WeatherStationDesctop
+namespace WeatherStation
 {
-    class UnixTimestampConverter
+    public class UnixTimestampConverter
     {
         public static DateTime GetCurrentDatetime(int unixTimestamp)
         {

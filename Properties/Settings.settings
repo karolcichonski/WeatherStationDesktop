@@ -1,7 +1,12 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="WeatherStationDesctop.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="longitude" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">18.6766</Value>
+    </Setting>
+    <Setting Name="latitude" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">50.2976</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>

@@ -7,26 +7,32 @@ using System.Net.Http;
 using WeatherStationDesktop;
 using Newtonsoft.Json;
 
-namespace WeatherStationDesctop
+namespace WeatherStation
 {
     public class OpenWeatherMap
     {
         public OpenWeatherMap()
         {
+
         }
 
-        public int httpStatusCode { get; protected set;}
+        public int HttpStatusCode { get; protected set;}
         protected OneDayWeather currentWeather;
         CurrentWeather OWMcurrentWeather;
         protected string json;
+        protected double longitude;
+        protected double latitude;
 
-        protected string httpRequest = $"https://api.openweathermap.org/data/2.5/weather?lat=50.2976&lon=18.6766&units=metric&appid={DBConnection.GetOpenWetherMapAPIKey()}";
+        protected string httpRequest;
 
         async virtual public Task GenerateWeatherObject()
         {
+            longitude = Properties.Settings.Default.longitude;
+            latitude = Properties.Settings.Default.latitude;
+            httpRequest = $"https://api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={longitude}&units=metric&appid={DBConnection.GetOpenWetherMapAPIKey()}";
 
-                await GettWeatherData(httpRequest);
-            if (httpStatusCode == 200 & json != null)
+            await GettWeatherData(httpRequest);
+            if (HttpStatusCode == 200 & json != null)
             {
                 OWMcurrentWeather = JsonConvert.DeserializeObject<CurrentWeather>(json);
                 OneDayWeather oneDayWeather = new OneDayWeather(OWMcurrentWeather);
@@ -44,8 +50,8 @@ namespace WeatherStationDesctop
             using (HttpClient httpClient = new HttpClient())
             {
                 var result= await httpClient.GetAsync(httpRequest);
-                httpStatusCode = (int)result.StatusCode;
-                if (httpStatusCode == 200)
+                HttpStatusCode = (int)result.StatusCode;
+                if (HttpStatusCode == 200)
                 {
                     json = await result.Content.ReadAsStringAsync();
                 }

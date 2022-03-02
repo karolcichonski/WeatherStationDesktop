@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WeatherStationDesctop
+namespace WeatherStation
 {
     public class OneDayWeather
     {

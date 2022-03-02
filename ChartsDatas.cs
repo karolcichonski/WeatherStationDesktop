@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WeatherStationDesktop;
 
-namespace WeatherStationDesctop
+namespace WeatherStation
 {
     class ChartsDatas
     {
@@ -27,7 +27,7 @@ namespace WeatherStationDesctop
         public List<double> Temperature { get; private set; }
         public List<double> Humidity { get; private set; }
 
-        List<SingleMeasure> InputData;
+        readonly List<SingleMeasure> InputData;
 
 
         void GetSimpleListByTime(int intervalInMin)

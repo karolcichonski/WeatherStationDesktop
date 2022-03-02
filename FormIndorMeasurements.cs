@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WeatherStationDesktop;
 
-namespace WeatherStationDesctop
+namespace WeatherStation
 {
     public partial class FormIndorMeasurements : Form
     {

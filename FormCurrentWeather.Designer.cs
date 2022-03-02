@@ -1,4 +1,4 @@
-﻿namespace WeatherStationDesctop
+﻿namespace WeatherStation
 {
     partial class FormCurrentWeather
     {

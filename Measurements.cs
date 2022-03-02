@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WeatherStationDesctop;
+using WeatherStation;
 
 namespace WeatherStationDesktop
 {
@@ -21,9 +21,9 @@ namespace WeatherStationDesktop
                 ConnectionStatus = true;
             }
         }
-        string query = "SELECT * FROM `ESP` ORDER BY Time Desc LIMIT 1";
+        readonly string query = "SELECT * FROM `ESP` ORDER BY Time Desc LIMIT 1";
 
-        List<SingleMeasure> AllMeasurements = new List<SingleMeasure>();
+        readonly List<SingleMeasure> AllMeasurements = new List<SingleMeasure>();
         public List<Exception> Exceptions { get; private set; } = new List<Exception>();
         
         public double LastTemp { get; private set; }

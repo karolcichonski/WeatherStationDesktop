@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using WeatherStationDesktop;
 
-namespace WeatherStationDesctop
+namespace WeatherStation
 {
-    class OpenWeatherMapForecast: OpenWeatherMap
+    public class OpenWeatherMapForecast: OpenWeatherMap
     {
         public OpenWeatherMapForecast()
         {
@@ -18,14 +18,16 @@ namespace WeatherStationDesctop
 
         OneCallWeather OneCallWeather;
         List<OneDayWeather> DailyWeather;
-        public List<OneDayWeather> HourlyWeather;
-        string httpRequest = $"https://api.openweathermap.org/data/2.5/onecall?lat=50.2976&lon=18.6766&units=metric&appid={DBConnection.GetOpenWetherMapAPIKey()}";
-        //string httpRequest = $"https://api.openweathermap.org/data/2.5/onecall/timemachine?lat=50.2976&lon=18.6766&dt={UnixTimestampConverter.GetNDaysAgo(5)}&units=metric&appid={DBConnection.GetOpenWetherMapAPIKey()}";
+        List<OneDayWeather> HourlyWeather;
+
         async override public Task GenerateWeatherObject()
         {
+            longitude = Properties.Settings.Default.longitude;
+            latitude = Properties.Settings.Default.latitude;
+            string httpRequest = $"https://api.openweathermap.org/data/2.5/onecall?lat={latitude}&lon={longitude}&units=metric&appid={DBConnection.GetOpenWetherMapAPIKey()}";
 
-                await GettWeatherData(httpRequest);
-            if (httpStatusCode == 200 & json != null)
+            await GettWeatherData(httpRequest);
+            if (HttpStatusCode == 200 & json != null)
             {
                 OneCallWeather = JsonConvert.DeserializeObject<OneCallWeather>(json);
                 foreach (OneCallWeather.OneCallWeatherDaily weatherDaily in OneCallWeather.daily)

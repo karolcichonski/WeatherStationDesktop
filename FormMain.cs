@@ -4,13 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Device.Location;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using WeatherStationDesctop;
+using WeatherStation;
 
 namespace WeatherStationDesktop
 {
@@ -48,19 +49,23 @@ namespace WeatherStationDesktop
         }
 
 
-        async Task UpdateWeatherForecast()
+        public async Task UpdateWeatherForecast()
         {
+
             OpenWeatherMapForecast openWeatherMapForecast = new OpenWeatherMapForecast();
             await openWeatherMapForecast.GenerateWeatherObject();
             ForecastWeadersDaily = openWeatherMapForecast.GetDailyWeather();
             ForecastWeadersHurly = openWeatherMapForecast.GetHourlyWeather();
-            openWeatherMapConnecionStatus = openWeatherMapForecast.httpStatusCode;
-            if (openWeatherMapForecast.httpStatusCode != 200)
+            openWeatherMapConnecionStatus = openWeatherMapForecast.HttpStatusCode;
+            if (openWeatherMapForecast.HttpStatusCode != 200)
             {
-                MessageBox.Show($"Failed connection to Open Weather Map API! code {openWeatherMapForecast.httpStatusCode}", $"Error {openWeatherMapForecast.httpStatusCode}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Failed connection to Open Weather Map API! code {openWeatherMapForecast.HttpStatusCode}", $"Error {openWeatherMapForecast.HttpStatusCode}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
-            } 
+            }
 
+            cartesianChartPressure.Series.Clear();
+            cartesianChartTemperature.Series.Clear();
+            cartesianChartRain.Series.Clear();
             currentWeather = ForecastWeadersDaily[0];
             textBoxWeatherTime.Text = currentWeather.DateTime.ToString("dddd, MMMM dd yyyy", culture);
             textBoxWeatherDesc.Text = currentWeather.Description;
@@ -140,12 +145,6 @@ namespace WeatherStationDesktop
             cartesianChartRain.AxisX.Add(axPrec);
 
         }
-
-
-
-
-
-
 
 
         private int? GetImageCode(string iconeCode)
@@ -244,11 +243,17 @@ namespace WeatherStationDesktop
             formHistoricalWeater.Show();
         }
 
+
         private void button_IndorMeasDetails_Click(object sender, EventArgs e)
         {
             FormIndorMeasurements formIndorMeasurements = new FormIndorMeasurements();
             formIndorMeasurements.Show();
         }
 
+        private void buttonSettings_Click(object sender, EventArgs e)
+        {
+            FormSettings formSettings = new FormSettings(this);
+            formSettings.Show();
+        }
     }
 }
