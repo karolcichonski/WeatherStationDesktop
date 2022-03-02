@@ -50,7 +50,7 @@ namespace WeatherStation
             this.Close();
         }
 
-        private void ComboBoxProvices_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBoxProvices_SelectedIndexChanged(object sender, EventArgs e)
         {
             List<string> citiesStr = cities.Where(x => x.Province == comboBoxProvices.Text).Select(y => y.Name).ToList();
             comboBoxCities.Items.Clear();
@@ -60,7 +60,7 @@ namespace WeatherStation
             }
         }
 
-        private void ComboBoxCities_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBoxCities_SelectedIndexChanged(object sender, EventArgs e)
         {
             City SelectedCity = cities.Find(x => x.Name == comboBoxCities.Text);
             textBoxLatitude.Text = SelectedCity.Latitude.ToString();
@@ -76,6 +76,31 @@ namespace WeatherStation
                 comboBoxProvices.Items.Add(prov);
             }
             
+        }
+
+        private void textBoxSearch_TextChanged(object sender, EventArgs e)
+        {
+            if (textBoxSearch.Text != "")
+            {
+                List<City> searchedCities = cities.Where(x => x.Name.Trim().ToLower().StartsWith(textBoxSearch.Text.ToLower())).ToList();
+                treeViewResults.Nodes.Clear();
+                foreach (City city in searchedCities)
+                {
+                    treeViewResults.Nodes.Add(city.Name);
+                    treeViewResults.Nodes[treeViewResults.Nodes.Count - 1].Tag = city;
+                }
+            }
+            else
+            {
+                treeViewResults.Nodes.Clear();
+            }
+        }
+
+        private void treeViewResults_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            City city = (City)treeViewResults.SelectedNode.Tag;
+            textBoxLatitude.Text = city.Latitude.ToString();
+            textBoxLongitude.Text = city.Longitude.ToString();
         }
     }
 }
